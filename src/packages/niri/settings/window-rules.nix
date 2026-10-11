@@ -41,5 +41,16 @@
         "open-maximized-to-edges" = true;
       };
     }
+    {
+      "window-rule" = {
+        match = {
+          _props = {
+            "app-id" = "steam";
+          };
+        };
+        "open-fullscreen" = false;
+        "open-maximized-to-edges" = true;
+      };
+    }
   ];
 }
