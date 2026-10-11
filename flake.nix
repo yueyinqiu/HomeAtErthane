@@ -4,11 +4,13 @@
       "https://yueyinqiu.cachix.org"
       "https://nvf.cachix.org"
       "https://niri.cachix.org"
+      "https://niri-epireyn.cachix.org"
     ];
     extra-trusted-public-keys = [
       "yueyinqiu.cachix.org-1:iooLFYpS7e6KAU4+QM5Zoj6Tq76jRGo+kjeAbu8JxAc="
       "nvf.cachix.org-1:GMQWiUhZ6ux9D5CvFFMwnc2nFrUHTeGaXRlVBXo+naI="
       "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
+      "niri-epireyn.cachix.org-1:tlVyFN7CtsDT+ZcLPS+ekFWeT1X6X4OqvWqbBMyIzFA="
     ];
   };
 
@@ -21,7 +23,10 @@
     nur.follows = "os/nur";
 
     home-manager.url = "github:nix-community/home-manager/master";
-    niri.url = "github:niri-wm/niri";
+
+    niri-flake.url = "github:epireyn/niri-flake";
+    niri.follows = "niri-flake/niri-unstable";
+    
     flatpaks.url = "github:in-a-dil-emma/declarative-flatpak/latest";
     nix-wpsoffice-cn.url = "github:Beriholic/nix-wpsoffice-cn";
     nvf.url = "github:notashelf/nvf";
