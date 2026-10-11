@@ -348,7 +348,7 @@
         "type": "github"
       }
     },
-    "niri-flake": {
+    "niri": {
       "inputs": {
         "niri-stable": "niri-stable",
         "niri-unstable": "niri-unstable",
@@ -871,11 +871,7 @@
         "home-manager-mihomo-manager": "home-manager-mihomo-manager",
         "import-tree": "import-tree",
         "mindustry-bin": "mindustry-bin",
-        "niri": [
-          "niri-flake",
-          "niri-unstable"
-        ],
-        "niri-flake": "niri-flake",
+        "niri": "niri",
         "nix-airgap": "nix-airgap",
         "nix-wpsoffice-cn": "nix-wpsoffice-cn",
         "nixpkgs": [
