@@ -7,7 +7,7 @@
 {
   wayland.windowManager.niri = {
     enable = true;
-    package = niri.niri;
+    package = niri.niri-unstable;
     enableDefaultConfig = false;
   };
   xdg.portal.config.niri = {

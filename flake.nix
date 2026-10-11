@@ -24,8 +24,7 @@
 
     home-manager.url = "github:nix-community/home-manager/master";
 
-    niri-flake.url = "github:epireyn/niri-flake";
-    niri.follows = "niri-flake/niri-unstable";
+    niri.url = "github:epireyn/niri-flake";
     
     flatpaks.url = "github:in-a-dil-emma/declarative-flatpak/latest";
     nix-wpsoffice-cn.url = "github:Beriholic/nix-wpsoffice-cn";
