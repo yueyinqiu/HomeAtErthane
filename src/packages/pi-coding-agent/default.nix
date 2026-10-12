@@ -7,6 +7,14 @@
       pkgs.wl-clipboard
     ];
 
+    programs.pi-coding-agent.context = ''
+      Host Context:
+      1. The current device is NixOS; do not dynamically modify the system environment.
+      2. Do not perform traversal operations under `/` or `/nix/store`, as this is extremely time-consuming.
+      3. Unless explicitly requested by the user, do not manipulate `git`.
+      4. In case of network issues, use the `mihomo-manager with for-firefox` command-line proxy.
+    '';
+
     settings = {
       defaultProvider = "workbuddy";
       defaultModel = "hy3";
