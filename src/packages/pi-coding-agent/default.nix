@@ -29,7 +29,7 @@
 
       ## Git Conventions
 
-      - **Do not** touch the git repository of the user's project. The user uses git to track the your own changes, so you must not run any git operations (commit/push/pull, etc.) against the project's repo.
+      - **Do not** touch the git repository of the user's project. The user uses git to track your own changes, so you must not run any git operations (commit/push/pull, etc.) against the project's repo.
     '';
 
     settings = {
