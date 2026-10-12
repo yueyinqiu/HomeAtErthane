@@ -7,7 +7,7 @@
       pkgs.wl-clipboard
     ];
 
-    programs.pi-coding-agent.context = ''
+    context = ''
       Host Context:
       1. The current device is NixOS; do not dynamically modify the system environment.
       2. Do not perform traversal operations under `/` or `/nix/store`, as this is extremely time-consuming.
