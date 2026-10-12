@@ -4,6 +4,7 @@
 
     extraPackages = [
       pkgs.nodejs_latest
+      pkgs.wl-clipboard
     ];
 
     settings = {
