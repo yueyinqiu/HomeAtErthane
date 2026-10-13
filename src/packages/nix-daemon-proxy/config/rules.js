@@ -10,6 +10,8 @@ function main(config, log) {
         "googlesource.com",
         "cachix.org",
         "corona.studio",
+        "nixos.org",
+        "vsassets.io",
     ];
 
     const direct = [
@@ -18,7 +20,6 @@ function main(config, log) {
         "download.codebuddy.cn",
         "elpa.gnu.org",
         "roslyn.blob.core.windows.net",
-        "vsassets.io",
         "qq.com",
         "pythonhosted.org",
         "steampowered.com",
@@ -29,7 +30,6 @@ function main(config, log) {
         "mirrors.ustc.edu.cn",
         "mirrors.cqupt.edu.cn",
         "mirror.sjtu.edu.cn",
-        "nixos.org",
         "nuget.org",
         "microsoft.com",
         "addons.mozilla.org",
@@ -37,6 +37,7 @@ function main(config, log) {
         "gitlab.freedesktop.org",
         "visualstudio.com",
         "wpscdn.cn",
+        "nya.globalslb.net"
     ];
 
     config["proxy-groups"] = [].concat(
