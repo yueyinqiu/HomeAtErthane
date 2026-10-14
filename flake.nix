@@ -37,6 +37,7 @@
     snavi.url = "github:yueyinqiu/Snavi-Nix";
     home-manager-mihomo-manager.url = "github:MihomoManager/HomeManagerMihomoManager";
     baidunetdisk.url = "github:yueyinqiu/BaidunetdiskNix";
+    nix-gaming.url = "github:fufexan/nix-gaming";
   };
 
   outputs = inputs: {
@@ -54,6 +55,7 @@
           nix-airgap = inputs.nix-airgap.packages.${system};
           niri = inputs.niri.packages.${system};
           baidunetdisk = inputs.baidunetdisk.packages.${system};
+          nix-gaming = inputs.nix-gaming.packages.${system};
         };
         modules = [
           inputs.NixVirt.homeModules.default
