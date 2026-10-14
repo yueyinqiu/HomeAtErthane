@@ -37,7 +37,8 @@ function main(config, log) {
         "gitlab.freedesktop.org",
         "visualstudio.com",
         "wpscdn.cn",
-        "nya.globalslb.net"
+        "nya.globalslb.net",
+        "cdn.blizzard.com"
     ];
 
     config["proxy-groups"] = [].concat(
