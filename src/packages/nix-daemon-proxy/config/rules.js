@@ -42,10 +42,13 @@ function main(config, log) {
         "netease.com"
     ];
 
-    config["proxy-groups"] = [].concat(
-        overseas.map(d => ({ name: d, type: "select", proxies: [proxy, "DIRECT"] })),
-        direct.map(d => ({ name: d, type: "select", proxies: ["DIRECT", proxy] })),
-        { name: "final", type: "select", proxies: ["REJECT", "DIRECT", proxy] }
+    config["proxy-groups"] = [
+        { name: "final", type: "select", proxies: ["REJECT", "DIRECT", proxy] },
+    ].concat(
+        overseas
+            .map(d => ({ name: d, type: "select", proxies: [proxy, "DIRECT"] }))
+            .concat(direct.map(d => ({ name: d, type: "select", proxies: ["DIRECT", proxy] })))
+            .sort((a, b) => a.name.localeCompare(b.name))
     );
 
     config["rules"] = overseas.concat(direct).map(d => "DOMAIN-SUFFIX," + d + "," + d).concat("MATCH,final");
