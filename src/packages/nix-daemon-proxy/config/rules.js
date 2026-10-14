@@ -38,7 +38,8 @@ function main(config, log) {
         "visualstudio.com",
         "wpscdn.cn",
         "nya.globalslb.net",
-        "cdn.blizzard.com"
+        "cdn.blizzard.com",
+        "netease.com"
     ];
 
     config["proxy-groups"] = [].concat(
