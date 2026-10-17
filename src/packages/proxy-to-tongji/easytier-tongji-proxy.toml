@@ -1,7 +1,10 @@
-socks5_proxy = "socks5://127.0.0.1:56509"
-
 dhcp = true
 listeners = []
+
+[[port_forward]]
+bind_addr = "127.0.0.1:21890"
+dst_addr = "10.236.127.1:46987"
+proto = "tcp"
 
 [flags]
 no_tun = true

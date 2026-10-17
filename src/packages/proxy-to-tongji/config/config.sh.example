@@ -27,15 +27,11 @@ proxies:
     port: 22
     username: yueyinqiu
     private-key: "$STATE_DIRECTORY/easytier-ssh-key"
-  - name: tongji-proxy-easytier-socks
-    type: socks5
-    server: 127.0.0.1
-    port: 56509
   - name: tongji-proxy
     type: vless
-    server: 10.236.127.1
-    port: 46987
-    uuid: "https://tongji-proxy-credential.tjslp.yueyinqiu.top/"
+    server: 127.0.0.1
+    port: 21890
+    uuid: "4d103928-60eb-4b00-a856-2e001d6b4d4a"
     network: tcp
     udp: true
     tls: true
@@ -45,5 +41,4 @@ proxies:
       short-id: 20b2a7cae3d8fde7
       support-x25519mlkem768: true
     client-fingerprint: chrome
-    dialer-proxy: tongji-proxy-easytier-socks
 EOF
