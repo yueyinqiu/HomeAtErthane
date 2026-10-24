@@ -2,14 +2,12 @@
   nixConfig = {
     extra-substituters = [
       "https://yueyinqiu.cachix.org"
-      "https://nvf.cachix.org"
       "https://niri.cachix.org"
       "https://niri-epireyn.cachix.org"
       "https://nix-gaming.cachix.org"
     ];
     extra-trusted-public-keys = [
       "yueyinqiu.cachix.org-1:iooLFYpS7e6KAU4+QM5Zoj6Tq76jRGo+kjeAbu8JxAc="
-      "nvf.cachix.org-1:GMQWiUhZ6ux9D5CvFFMwnc2nFrUHTeGaXRlVBXo+naI="
       "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
       "niri-epireyn.cachix.org-1:tlVyFN7CtsDT+ZcLPS+ekFWeT1X6X4OqvWqbBMyIzFA="
       "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
@@ -32,7 +30,6 @@
     
     flatpaks.url = "github:in-a-dil-emma/declarative-flatpak/latest";
     nix-wpsoffice-cn.url = "github:Beriholic/nix-wpsoffice-cn";
-    nvf.url = "github:notashelf/nvf";
     mindustry-bin.url = "github:yueyinqiu/MindustryBinNix";
     nix-airgap.url = "github:bitbloxhub/nix-airgap";
     sub-nix.url = "github:yueyinqiu/SubNix";
@@ -62,7 +59,6 @@
         modules = [
           inputs.NixVirt.homeModules.default
           inputs.flatpaks.homeModules.default
-          inputs.nvf.homeManagerModules.default
           inputs.sub-nix.homeManagerModules.sub-nix
           inputs.snavi.homeManagerModules.snavi
           inputs.home-manager-mihomo-manager.homeManagerModules.home-manager-mihomo-manager
