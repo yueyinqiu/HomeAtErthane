@@ -21,8 +21,10 @@
 
     os.url = "github:yueyinqiu/NixosEarthLatitude7490";
     nixpkgs.follows = "os/nixpkgs";
-    NixVirt.follows = "os/NixVirt";
-    nur.follows = "os/nur";
+    NixVirt = {
+      url = "github:AshleyYakeley/NixVirt/v0.6.0";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     home-manager.url = "github:nix-community/home-manager/master";
 
