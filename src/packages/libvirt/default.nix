@@ -50,7 +50,13 @@
                 threads = 1;
               };
             };
-            devices = base.devices // {
+            devices = base.devices // {interface = {
+                type = "user";
+                model = {
+                  type = "virtio";
+                };
+                source = null;
+              };
               disk = lib.lists.imap0 (
                 i: disk:
                 if i == 0 then
