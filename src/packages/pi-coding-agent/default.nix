@@ -33,11 +33,10 @@
     '';
 
     settings = {
-      defaultProvider = "workbuddy";
-      defaultModel = "hy3";
+      defaultProvider = "35-220-164-252-3888";
+      defaultModel = "deepseek-v4-pro";
       defaultThinkingLevel = "low";
       packages = [
-        "git:github.com/icekale/pi-workbuddy-connect"
       ];
     };
 
