@@ -7,9 +7,8 @@
 }:
 {
   home.packages = with pkgs; [
-    virt-manager
-    virt-viewer
     libvirt
+    virt-viewer
   ];
 
   virtualisation.libvirt.enable = true;
