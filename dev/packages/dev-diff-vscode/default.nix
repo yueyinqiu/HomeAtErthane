@@ -14,7 +14,7 @@ pkgs.writeShellApplication {
       ) \
       <(
         nix eval --json \
-          '.#homeConfigurations."yueyinqiu@earth-latitude7490".config.programs.vscode.profiles.default.userSettings'
+          '.#homeConfigurations."yueyinqiu@erthane".config.programs.vscode.profiles.default.userSettings'
       )
   '';
 }

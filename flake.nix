@@ -17,7 +17,7 @@
   inputs = {
     import-tree.url = "github:denful/import-tree";
 
-    os.url = "github:yueyinqiu/NixosEarthLatitude7490";
+    os.url = "github:yueyinqiu/NixosErthane";
     nixpkgs.follows = "os/nixpkgs";
     NixVirt = {
       url = "github:AshleyYakeley/NixVirt/v0.6.0";
@@ -40,7 +40,7 @@
   };
 
   outputs = inputs: {
-    homeConfigurations."yueyinqiu@earth-latitude7490" =
+    homeConfigurations."yueyinqiu@erthane" =
       let
         system = "x86_64-linux";
       in
