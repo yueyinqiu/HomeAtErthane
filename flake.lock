@@ -753,16 +753,16 @@
         "nixpkgs": "nixpkgs_11"
       },
       "locked": {
-        "lastModified": 1792825367,
-        "narHash": "sha256-C7C//wCpXhenX5M6rBziKhyhWc5Xu/46ymXlR+g6Oik=",
+        "lastModified": 1792923069,
+        "narHash": "sha256-1h9vNL7ipBfT9RhJ2fLDi7t3NCBBRSsI42daCYp888E=",
         "owner": "yueyinqiu",
-        "repo": "NixosEarthLatitude7490",
-        "rev": "7745aa681a1f55154de1a7070608f58b1a91d8ba",
+        "repo": "NixosErthane",
+        "rev": "a1cd16c0109368907165166a7eefa75d26cc1722",
         "type": "github"
       },
       "original": {
         "owner": "yueyinqiu",
-        "repo": "NixosEarthLatitude7490",
+        "repo": "NixosErthane",
         "type": "github"
       }
     },
