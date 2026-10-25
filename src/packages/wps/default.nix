@@ -10,10 +10,10 @@
       buildInputs = [ pkgs.makeWrapper ];
       postBuild = ''
         wrapProgram $out/bin/wps \
-          --set GTK_IM_MODULE "fcitx" \
-          --set QT_IM_MODULE "fcitx" \
-          --set SDL_IM_MODULE "fcitx" \
-          --set XDG_CONFIG_HOME "${config.xdg.configHome}/wps-fake-xdg"
+          --set-default GTK_IM_MODULE "fcitx" \
+          --set-default QT_IM_MODULE "fcitx" \
+          --set-default SDL_IM_MODULE "fcitx" \
+          --set-default XDG_CONFIG_HOME "${config.xdg.configHome}/wps-fake-xdg"
       '';
     })
   ];
