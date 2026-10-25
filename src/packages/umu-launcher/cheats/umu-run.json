@@ -1,0 +1,10 @@
+{
+  "Command": [
+    {
+      "$type": "CommandTokenLiteral",
+      "Value": "umu-run"
+    }
+  ],
+  "Description": "umu; wine; proton; run",
+  "ExtraArguments": true
+}
