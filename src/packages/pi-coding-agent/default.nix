@@ -75,6 +75,23 @@
             }
           ];
         };
+        "35-220-164-252-3888-http" = {
+          baseUrl = "https://35.220.164.252:3888/v1";
+          api = "openai-completions";
+          compat = {
+            supportsDeveloperRole = false;
+          };
+          models = [
+            {
+              id = "deepseek-v4-pro";
+              name = "deepseek-v4-pro";
+              contextWindow = 900000;
+              maxTokens = 384000;
+              reasoning = true;
+              input = [ "text" ];
+            }
+          ];
+        };
       };
     };
   };
