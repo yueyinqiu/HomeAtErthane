@@ -3,8 +3,16 @@
     {
       "$type": "CommandTokenLiteral",
       "Value": "umu-run"
+    },
+    {
+      "$type": "CommandTokenVariable",
+      "Name": "exe",
+      "Suggester": {
+        "$type": "ArgumentSuggesterCsharp",
+        "ScriptPath": "suggest-exe.cs"
+      }
     }
   ],
   "Description": "umu; wine; proton; run",
-  "ExtraArguments": true
+  "ExtraArguments": false
 }
