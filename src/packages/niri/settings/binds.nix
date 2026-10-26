@@ -41,7 +41,9 @@
       };
       "spawn-sh" = [
         ''
-          ghostty --working-directory="$HOME" -e expect -c 'spawn -noecho bash; send -- "exec "; interact'
+          ghostty --working-directory="$HOME" \
+            -e expect -c \
+            'spawn -noecho bash; expect "]$ "; send -- "exec "; interact'
         ''
       ];
     };
