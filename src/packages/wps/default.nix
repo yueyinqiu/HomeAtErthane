@@ -1,4 +1,13 @@
-{ pkgs, config, ... }: {
+{ pkgs, config, ... }:
+let
+  firefox = pkgs.writeShellApplication {
+    name = "firefox";
+    text = ''
+      exec niri msg action spawn -- firefox "$@"
+    '';
+  };
+in
+{
   # https://github.com/Beriholic/nix-wpsoffice-cn/issues/1#issuecomment-3706931491
   # https://bbs.wps.cn/topic/61831
   # Don't Login! It will create a fucking Documents directory!
@@ -13,7 +22,8 @@
           --set GTK_IM_MODULE "fcitx" \
           --set QT_IM_MODULE "fcitx" \
           --set SDL_IM_MODULE "fcitx" \
-          --set XDG_CONFIG_HOME "${config.xdg.configHome}/wps-fake-xdg"
+          --set XDG_CONFIG_HOME "${config.xdg.configHome}/wps-fake-xdg" \
+          --prefix PATH : "${firefox}/bin"
       '';
     })
   ];
