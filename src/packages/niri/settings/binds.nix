@@ -43,7 +43,7 @@
         ''
           ghostty --working-directory="$HOME" \
             -e expect -c \
-            'spawn -noecho bash; expect "]\$ "; send -- "exec "; interact'
+            'spawn bash; send -- "exec "; interact'
         ''
       ];
     };
