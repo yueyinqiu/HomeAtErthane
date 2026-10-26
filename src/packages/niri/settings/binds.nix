@@ -45,6 +45,18 @@
         ''
       ];
     };
+    "Mod+Shift+W" = {
+      _props = {
+        "hotkey-overlay-title" = null;
+      };
+      "spawn-sh" = [
+        ''
+          ghostty --working-directory="$HOME" \
+            -e expect -c \
+            'spawn bash; send -- "exec "; interact'
+        ''
+      ];
+    };
 
     # --- Screen reader / accessibility ---
     "Super+Alt+S" = {
