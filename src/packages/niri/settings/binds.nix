@@ -8,7 +8,7 @@
     "Ctrl+Alt+Delete" = { _props = { "hotkey-overlay-title" = null; }; "quit" = { }; };
 
     # --- Terminal / launcher ---
-    "Mod+W" = { _props = { "hotkey-overlay-title" = "Terminal"; }; "spawn-sh" = [ "ghostty --working-directory=\"$HOME\"" ]; };
+    "Mod+W" = { _props = { "hotkey-overlay-title" = "Terminal"; }; "spawn-sh" = [ "ghostty --working-directory=\"$HOME\" -e expect -c 'spawn bash; send -- \"exec \"; interact'" ]; };
 
     # --- Screen reader / accessibility ---
     "Super+Alt+S" = { _props = { "allow-when-locked" = true; "hotkey-overlay-title" = null; }; "spawn-sh" = [ "pkill orca || exec orca" ]; };
