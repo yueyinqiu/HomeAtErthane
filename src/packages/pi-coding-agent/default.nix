@@ -42,6 +42,23 @@
 
     models = {
       providers = {
+        "tongji" = {
+          baseUrl = "https://agi.tongji.edu.cn/v1";
+          api = "openai-completions";
+          compat = {
+            supportsDeveloperRole = false;
+          };
+          models = [
+            {
+              id = "DeepSeek-V4.1-Flash";
+              name = "DeepSeek-V4.1-Flash";
+              contextWindow = 900000;
+              maxTokens = 384000;
+              reasoning = true;
+              input = [ "text" ];
+            }
+          ];
+        };
         "35-220-164-252-3888" = {
           baseUrl = "https://api.boyuerichdata.opensphereai.com/v1";
           api = "openai-completions";
