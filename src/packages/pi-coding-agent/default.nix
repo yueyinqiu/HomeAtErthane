@@ -55,7 +55,7 @@
               contextWindow = 900000;
               maxTokens = 384000;
               reasoning = true;
-              input = [ "text" ];
+              input = [ "text" "image" ];
             }
           ];
         };
