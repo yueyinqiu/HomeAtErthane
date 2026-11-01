@@ -12,7 +12,7 @@ function main(config, log) {
             parts.length - 1;
         const originalPolicy = parts[policyIndex];
 
-        const baseName = parts.slice(0, policyIndex).join(",");
+        const baseName = parts[policyIndex - 1];
 
         let groupName = baseName;
         let i = 2;
