@@ -1,5 +1,0 @@
-rules:
-  - DOMAIN-SUFFIX,huggingface.co,home-manager-mihomo-manager-to-overseas
-  - DOMAIN-SUFFIX,hf.co,home-manager-mihomo-manager-to-overseas
-
-  - MATCH,DIRECT

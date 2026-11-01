@@ -1,5 +1,0 @@
-rules:
-  - DOMAIN-SUFFIX,huggingface.co,my-proxies-bai-piao-ji-chang
-  - DOMAIN-SUFFIX,hf.co,my-proxies-bai-piao-ji-chang
-
-  - MATCH,DIRECT
