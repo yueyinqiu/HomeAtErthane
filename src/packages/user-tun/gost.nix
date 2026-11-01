@@ -10,7 +10,7 @@ let
     services = [
       {
         name = "user-1000-in";
-        addr = unixSock;                       # 裸路径，别加 unix://
+        addr = unixSock;
         handler = { type = "socks5"; chain = "to-mihomo"; };
         listener = { type = "unix"; };
       }
