@@ -1,11 +1,6 @@
 { pkgs, ... }: {
   programs.firefox.enable = true;
 
-  home-manager-mihomo-manager.instances.for-firefox = {
-    port = 37260;
-    configuration = ./proxy;
-  };
-
   home.packages = [
     (pkgs.writeShellApplication {
       name = "f";
@@ -14,5 +9,4 @@
       '';
     })
   ];
-
 }
