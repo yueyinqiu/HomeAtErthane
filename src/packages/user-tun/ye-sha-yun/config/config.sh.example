@@ -15,8 +15,8 @@ fi
 
 "$MMMM" \
   merge "$STATE_DIRECTORY/origin-ye-sha-yun.yaml" \
-  merge direct.yaml \
   js add-dialer.js \
+  merge direct.yaml \
   js remove-dns-rules.js \
   js to-global.js \
   save "$OUTPUT_PATH"
