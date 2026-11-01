@@ -1,4 +1,6 @@
 function main(config, log) {
+    log(Object.keys(config));
+
     const proxies = config.proxies.map((p) => p.name);
     const groups = new Map();
 
