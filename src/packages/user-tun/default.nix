@@ -45,6 +45,7 @@ in
       ExecStart = "${pkgs.gost}/bin/gost -C ${gostConfig}";
       Restart = "on-failure";
       RestartSec = 3;
+      UMask = "0000";   # socket 世界可写（0777），靠上层目录 0770 兜底
     };
     Install = {
       WantedBy = [ "default.target" ];
