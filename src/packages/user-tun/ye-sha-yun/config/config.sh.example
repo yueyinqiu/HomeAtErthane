@@ -7,8 +7,14 @@
 # "$HOME_MANAGER_MIHOMO_MANAGER_PROXIES" for the generated list of managed proxy instances
 # . for the instance's own configuration files
 
-if [ -z "$(find "$OUTPUT_PATH" -mtime -30)" ]; then
+if [ -z "$(find "$STATE_DIRECTORY/origin-ye-sha-yun.yaml" -mtime -30)" ]; then
   curl -L -H "User-Agent: flclash" \
-    --output "$OUTPUT_PATH" \
+    --output "$STATE_DIRECTORY/origin-ye-sha-yun.yaml" \
     https://vx.yeshayun.com/
 fi
+
+"$MMMM" \
+  merge "$STATE_DIRECTORY/origin-ye-sha-yun.yaml" \
+  js remove-dns-rules.js \
+  js to-global.js \
+  save "$OUTPUT_PATH"
