@@ -1,21 +1,34 @@
 rules:
+  # cachix
+  - DOMAIN-SUFFIX,cachix.org,hmmm-ye-sha-yun
+
+  # corona studio
+  - DOMAIN,corona.studio,hmmm-ye-sha-yun
+
+  # github
   - DOMAIN-SUFFIX,github.com,hmmm-ye-sha-yun
   - DOMAIN-SUFFIX,githubusercontent.com,hmmm-ye-sha-yun
 
+  # gitlab
   - DOMAIN-SUFFIX,gitlab.com,hmmm-ye-sha-yun
 
-  - DOMAIN-SUFFIX,web.archive.org,hmmm-ye-sha-yun
-
-  - DOMAIN-SUFFIX,nomachine.com,hmmm-ye-sha-yun
-
+  # google
+  - DOMAIN,google.com,hmmm-ye-sha-yun
   - DOMAIN-SUFFIX,googlesource.com,hmmm-ye-sha-yun
+  - DOMAIN-SUFFIX,translate.google.com,hmmm-ye-sha-yun
+  - DOMAIN-SUFFIX,www.google.com,hmmm-ye-sha-yun
+  - DOMAIN-SUFFIX,www.google.com.hk,hmmm-ye-sha-yun
 
-  - DOMAIN-SUFFIX,nixos.org,hmmm-ye-sha-yun
-  - DOMAIN-SUFFIX,cachix.org,hmmm-ye-sha-yun
+  # nixos
+  - DOMAIN,discourse.nixos.org,hmmm-ye-sha-yun
+  - DOMAIN,cache.nixos.org,hmmm-ye-sha-yun
+  - DOMAIN,channels.nixos.org,hmmm-ye-sha-yun
 
-  - DOMAIN-SUFFIX,corona.studio,hmmm-ye-sha-yun
-
+  # visual studio code
   - DOMAIN-SUFFIX,vsassets.io,hmmm-ye-sha-yun
   
+  # web archive
+  - DOMAIN-SUFFIX,web.archive.org,hmmm-ye-sha-yun
+
   - MATCH,direct
   
