@@ -1,14 +1,5 @@
 mode: global
 
-proxy-groups:
-  - name: GLOBAL
-    type: select
-    proxies:
-      - hmmm-rules
-      - rescue
-      - direct
-      - REJECT
-
 proxies:
   - name: "direct"
     type: socks5
