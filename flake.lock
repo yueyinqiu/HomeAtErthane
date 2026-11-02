@@ -254,11 +254,11 @@
         "sub-nix": "sub-nix"
       },
       "locked": {
-        "lastModified": 1790235253,
-        "narHash": "sha256-gNUHs9oeHGkjV8AMTsjv53VkryKh3qEVf6bi5ZdxzuM=",
+        "lastModified": 1793599482,
+        "narHash": "sha256-5aeow7wihcivEYLjiHU84XX0HUJz9ulAZoIkBYKqRFg=",
         "owner": "MihomoManager",
         "repo": "HomeManagerMihomoManager",
-        "rev": "d4cd3b7d5025e4d3f146d0dd47b6958aac28d97b",
+        "rev": "e6a5033b9e9cf68052338eb5c0d4fbf1bbd60e1b",
         "type": "github"
       },
       "original": {

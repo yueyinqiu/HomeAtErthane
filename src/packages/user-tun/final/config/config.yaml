@@ -4,7 +4,7 @@ proxy-groups:
   - name: GLOBAL
     type: select
     proxies:
-      - home-manager-mihomo-manager-rules
+      - hmmm-rules
       - rescue
       - direct
       - REJECT
