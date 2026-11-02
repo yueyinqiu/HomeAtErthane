@@ -1,5 +1,5 @@
 { ... }: {
-  home-manager-mihomo-manager.instances.to-overseas = {
+  home-manager-mihomo-manager.instances.ye-sha-yun = {
     port = 61068;
     configuration = ./config;
   };
