@@ -7,9 +7,18 @@
 # "$HOME_MANAGER_MIHOMO_MANAGER_PROXIES" for the generated list of managed proxy instances
 # . for the instance's own configuration files
 
+origin="$STATE_DIRECTORY/origin.yaml"
+if [ -z "$(find "$origin" -mtime -90)" ]; then
+  curl -L -H "User-Agent: flclash" \
+    --output "$origin" \
+    https://vx.yeshayun.com/
+fi
+
 "$MMMM" \
-    merge "$HOME_MANAGER_MIHOMO_MANAGER_PROXIES" \
-    merge direct.yaml \
-    merge default-rules.yaml \
-    js rules.js \
-    save "$OUTPUT_PATH"
+  merge "$origin" \
+  merge remove-proxies.yaml \
+  merge add-proxies.yaml \
+  merge "$HOME_MANAGER_MIHOMO_MANAGER_PROXIES" \
+  js update-proxy-groups.js \
+  edit prepend-rules.yaml \
+  save "$OUTPUT_PATH"

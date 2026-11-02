@@ -1,0 +1,16 @@
+Rules:
+  Delete: []
+  Prepend:
+    - DOMAIN-SUFFIX,pjlab.org.cn,home-manager-mihomo-manager-to-pjlab
+    - IP-CIDR,10.1.20.52/32,home-manager-mihomo-manager-to-pjlab
+    - DOMAIN-SUFFIX,tjslp.yueyinqiu.top,home-manager-mihomo-manager-to-tongji
+    - DOMAIN-SUFFIX,tongji.edu.cn,home-manager-mihomo-manager-to-tongji
+  Append: []
+Proxies:
+  Delete: []
+  Prepend: []
+  Append: []
+ProxyGroups:
+  Delete: []
+  Prepend: []
+  Append: []
