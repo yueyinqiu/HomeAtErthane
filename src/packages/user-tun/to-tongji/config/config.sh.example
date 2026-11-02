@@ -7,8 +7,6 @@
 # "$HOME_MANAGER_MIHOMO_MANAGER_PROXIES" for the generated list of managed proxy instances
 # . for the instance's own configuration files
 
-cp "/home/yueyinqiu/.ssh/id_ed25519" "$STATE_DIRECTORY/easytier-ssh-key"
-
 cat > "$OUTPUT_PATH" << EOF
 mode: global
 
@@ -16,22 +14,15 @@ proxy-groups:
   - name: GLOBAL
     type: select
     proxies:
-      - lab-g3080
       - tongji-proxy
       - DIRECT
 
 proxies:
-  - name: "lab-g3080"
-    type: ssh
-    server: 10.126.126.3
-    port: 22
-    username: yueyinqiu
-    private-key: "$STATE_DIRECTORY/easytier-ssh-key"
   - name: tongji-proxy
     type: vless
     server: 127.0.0.1
     port: 21890
-    uuid: "4d103928-60eb-4b00-a856-2e001d6b4d4a"
+    uuid: "XXXXXX"
     network: tcp
     udp: true
     tls: true
