@@ -17,8 +17,8 @@ fi
 "$MMMM" \
   merge "$origin" \
   merge remove-proxies.yaml \
-  merge add-proxies.yaml \
   merge "$HOME_MANAGER_MIHOMO_MANAGER_PROXIES" \
   js update-proxy-groups.js \
+  merge add-direct.yaml \
   edit prepend-rules.yaml \
   save "$OUTPUT_PATH"

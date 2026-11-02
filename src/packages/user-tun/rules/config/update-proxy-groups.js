@@ -3,7 +3,10 @@ function main(config, log) {
   const groupNames = new Set(config["proxy-groups"].map(g => g.name));
 
   for (const group of config["proxy-groups"]) {
-    group.proxies = [...group.proxies.filter(p => groupNames.has(p)), ...proxyNames];
+    group.proxies = [
+      ...group.proxies.filter(p => p === "DIRECT" || groupNames.has(p)),
+      ...proxyNames
+    ].map(p => p === "DIRECT" ? "direct" : p);
   }
 
   return config;
