@@ -73,6 +73,17 @@
               reasoning = true;
               input = [ "text" ];
             }
+            {
+              id = "deepseek-v4.1-flash";
+              name = "deepseek-v4.1-flash";
+              contextWindow = 900000;
+              maxTokens = 384000;
+              reasoning = true;
+              input = [
+                "text"
+                "image"
+              ];
+            }
           ];
         };
       };
