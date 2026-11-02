@@ -1,0 +1,13 @@
+rules:
+  - DOMAIN-SUFFIX,github.com,home-manager-mihomo-manager-to-overseas
+  - DOMAIN-SUFFIX,githubusercontent.com,home-manager-mihomo-manager-to-overseas
+  - DOMAIN-SUFFIX,gitlab.com,home-manager-mihomo-manager-to-overseas
+  - DOMAIN-SUFFIX,web.archive.org,home-manager-mihomo-manager-to-overseas
+  - DOMAIN-SUFFIX,nomachine.com,home-manager-mihomo-manager-to-overseas
+  - DOMAIN-SUFFIX,googlesource.com,home-manager-mihomo-manager-to-overseas
+  - DOMAIN-SUFFIX,cachix.org,home-manager-mihomo-manager-to-overseas
+  - DOMAIN-SUFFIX,corona.studio,home-manager-mihomo-manager-to-overseas
+  - DOMAIN-SUFFIX,nixos.org,home-manager-mihomo-manager-to-overseas
+  - DOMAIN-SUFFIX,vsassets.io,home-manager-mihomo-manager-to-overseas  
+  - MATCH,direct
+  
