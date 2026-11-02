@@ -1,0 +1,20 @@
+mode: global
+
+proxy-groups:
+  - name: GLOBAL
+    type: select
+    proxies:
+      - direct
+      - rescue
+      - REJECT
+
+proxies:
+  - name: "direct"
+    type: socks5
+    server: 127.0.0.1
+    port: 53077
+  - name: "rescue"
+    type: socks5
+    server: 127.0.0.1
+    port: 42279
+

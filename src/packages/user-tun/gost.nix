@@ -4,7 +4,7 @@ let
 
   # 与 NixosErthane 的 user-tun 部分保持一致（system 侧 gost 把 uid1000 流量转发到这个 unix socket）
   unixSock = "/run/user-tun/1000/sock";
-  mihomoSocksPort = 22764;   # mihomo 的 mixed-in 重入端口
+  mihomoSocksPort = 16884;   # mihomo 的 mixed-in 重入端口
 
   gostConfig = yaml.generate "user-tun-gost.yaml" {
     services = [
