@@ -6,18 +6,25 @@ rules:
   - DOMAIN,corona.studio,hmmm-ye-sha-yun
 
   # github
-  - DOMAIN-SUFFIX,github.com,hmmm-ye-sha-yun
-  - DOMAIN-SUFFIX,githubusercontent.com,hmmm-ye-sha-yun
+  - DOMAIN,github.com,hmmm-ye-sha-yun
+  - DOMAIN,api.github.com,hmmm-ye-sha-yun
+  - DOMAIN,codeload.github.com,hmmm-ye-sha-yun
+  - DOMAIN,objects.githubusercontent.com,hmmm-ye-sha-yun
+  - DOMAIN,raw.githubusercontent.com,hmmm-ye-sha-yun
+  - DOMAIN,gist.githubusercontent.com,hmmm-ye-sha-yun
+  - DOMAIN,avatars.githubusercontent.com,hmmm-ye-sha-yun
+  - DOMAIN,user-images.githubusercontent.com,hmmm-ye-sha-yun
+  - DOMAIN,media.githubusercontent.com,hmmm-ye-sha-yun
 
   # gitlab
-  - DOMAIN-SUFFIX,gitlab.com,hmmm-ye-sha-yun
+  - DOMAIN,gitlab.com,hmmm-ye-sha-yun
+  - DOMAIN,registry.gitlab.com,hmmm-ye-sha-yun
 
   # google
   - DOMAIN,google.com,hmmm-ye-sha-yun
-  - DOMAIN-SUFFIX,googlesource.com,hmmm-ye-sha-yun
-  - DOMAIN-SUFFIX,translate.google.com,hmmm-ye-sha-yun
-  - DOMAIN-SUFFIX,www.google.com,hmmm-ye-sha-yun
-  - DOMAIN-SUFFIX,www.google.com.hk,hmmm-ye-sha-yun
+  - DOMAIN,translate.google.com,hmmm-ye-sha-yun
+  - DOMAIN,www.google.com,hmmm-ye-sha-yun
+  - DOMAIN,www.google.com.hk,hmmm-ye-sha-yun
 
   # nixos
   - DOMAIN,discourse.nixos.org,hmmm-ye-sha-yun
@@ -28,7 +35,7 @@ rules:
   - DOMAIN-SUFFIX,vsassets.io,hmmm-ye-sha-yun
   
   # web archive
-  - DOMAIN-SUFFIX,web.archive.org,hmmm-ye-sha-yun
+  - DOMAIN,web.archive.org,hmmm-ye-sha-yun
 
   - MATCH,direct
   
