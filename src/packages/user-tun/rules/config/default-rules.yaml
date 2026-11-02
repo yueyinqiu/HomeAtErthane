@@ -1,13 +1,21 @@
 rules:
   - DOMAIN-SUFFIX,github.com,hmmm-ye-sha-yun
   - DOMAIN-SUFFIX,githubusercontent.com,hmmm-ye-sha-yun
+
   - DOMAIN-SUFFIX,gitlab.com,hmmm-ye-sha-yun
+
   - DOMAIN-SUFFIX,web.archive.org,hmmm-ye-sha-yun
+
   - DOMAIN-SUFFIX,nomachine.com,hmmm-ye-sha-yun
+
   - DOMAIN-SUFFIX,googlesource.com,hmmm-ye-sha-yun
-  - DOMAIN-SUFFIX,cachix.org,hmmm-ye-sha-yun
-  - DOMAIN-SUFFIX,corona.studio,hmmm-ye-sha-yun
+
   - DOMAIN-SUFFIX,nixos.org,hmmm-ye-sha-yun
+  - DOMAIN-SUFFIX,cachix.org,hmmm-ye-sha-yun
+
+  - DOMAIN-SUFFIX,corona.studio,hmmm-ye-sha-yun
+
   - DOMAIN-SUFFIX,vsassets.io,hmmm-ye-sha-yun
+  
   - MATCH,direct
   
