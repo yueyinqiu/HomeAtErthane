@@ -7,4 +7,7 @@
 # "$HOME_MANAGER_MIHOMO_MANAGER_PROXIES" for the generated list of managed proxy instances
 # . for the instance's own configuration files
 
-cp config.yaml "$OUTPUT_PATH"
+"$MMMM" \
+  merge config.yaml \
+  merge "$HOME_MANAGER_MIHOMO_MANAGER_PROXIES" \
+  save "$OUTPUT_PATH"

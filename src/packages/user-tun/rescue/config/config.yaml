@@ -6,6 +6,7 @@ proxy-groups:
     proxies:
       - direct
       - rescue
+      - home-manager-mihomo-manager-rules
       - REJECT
 
 proxies:
