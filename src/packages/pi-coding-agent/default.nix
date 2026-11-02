@@ -84,6 +84,17 @@
                 "image"
               ];
             }
+            {
+              id = "gpt-6-luna";
+              name = "gpt-6-luna";
+              contextWindow = 900000;
+              maxTokens = 384000;
+              reasoning = true;
+              input = [
+                "text"
+                "image"
+              ];
+            }
           ];
         };
       };
