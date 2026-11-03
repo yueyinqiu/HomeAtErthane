@@ -25,7 +25,7 @@ let
           ];
 
           bind.ro = [
-            # "/etc"
+            "/etc"
           ];
 
           env = {
