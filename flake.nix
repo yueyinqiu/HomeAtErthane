@@ -31,7 +31,6 @@
     home-manager-mihomo-manager.url = "github:MihomoManager/HomeManagerMihomoManager";
     baidunetdisk.url = "github:yueyinqiu/BaidunetdiskNix";
     nixpak.url = "github:nixpak/nixpak";
-    deepseek-harness.url = "github:moraxyc/deepseek-harness.nix";
   };
 
   outputs = inputs: {
@@ -50,7 +49,6 @@
           niri = inputs.niri.packages.${system};
           baidunetdisk = inputs.baidunetdisk.packages.${system};
           nixpak = inputs.nixpak;
-          deepseek-harness = inputs.deepseek-harness.packages.${system};
         };
         modules = [
           inputs.NixVirt.homeModules.default
@@ -58,7 +56,6 @@
           inputs.sub-nix.homeManagerModules.sub-nix
           inputs.snavi.homeManagerModules.snavi
           inputs.home-manager-mihomo-manager.homeManagerModules.home-manager-mihomo-manager
-          inputs.deepseek-harness.homeModules.default
           (inputs.import-tree ./src)
         ];
       };
