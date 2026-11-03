@@ -36,7 +36,7 @@
       defaultModel = "deepseek-v4-pro";
       defaultThinkingLevel = "low";
       packages = [
-        "npm:@xzzpig/pi-sandbox"
+        # "npm:@xzzpig/pi-sandbox"
       ];
     };
 
