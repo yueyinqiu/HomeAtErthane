@@ -5,6 +5,9 @@
     extraPackages = [
       pkgs.nodejs_latest
       pkgs.wl-clipboard
+      pkgs.bubblewrap
+      pkgs.socat
+      pkgs.ripgrep
     ];
 
     context = ''
@@ -33,6 +36,7 @@
       defaultModel = "deepseek-v4-pro";
       defaultThinkingLevel = "low";
       packages = [
+        "npm:@xzzpig/pi-sandbox"
       ];
     };
 
@@ -100,4 +104,17 @@
       };
     };
   };
+
+  home.file.".pi/agent/sandbox.json".text = ''
+    {
+      "filesystem": {
+        "allowRead": [
+          ".",
+          "~/.config",
+          "~/.local",
+          "~/.nix-profile"
+        ]
+      }
+    }
+  '';
 }
