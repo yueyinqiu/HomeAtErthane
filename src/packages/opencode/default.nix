@@ -3,7 +3,7 @@ let
   sandboxShell = pkgs.writeShellApplication {
     name = "opencode-sandbox-shell";
     text = ''
-      ROOT="''${OPENCODE_SANDBOX_ROOT:-$PWD}"
+      PROJECT="''${OPENCODE_SANDBOX_ROOT:-$PWD}"
       exec ${pkgs.bubblewrap}/bin/bwrap \
         --unshare-user --unshare-ipc --unshare-pid --unshare-uts --unshare-cgroup \
         --die-with-parent \
@@ -13,17 +13,17 @@ let
         --ro-bind /usr /usr \
         --ro-bind /etc /etc \
         --ro-bind /run /run \
-        --bind "$ROOT" "$ROOT" \
+        --bind "$PROJECT" "$PROJECT" \
         --tmpfs /tmp \
         --dev /dev \
         --proc /proc \
-        --chdir "$ROOT" \
+        --chdir "$PROJECT" \
         --clearenv \
         --setenv PATH "/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:/usr/bin:/bin" \
-        --setenv HOME "$ROOT" \
-        --setenv TERM "''${TERM:-xterm-256color}" \
-        --setenv LANG "''${LANG:-C.UTF-8}" \
-        --setenv USER "''${USER:-yueyinqiu}" \
+        --setenv HOME "$HOME" \
+        --setenv TERM "''${TERM-}" \
+        --setenv LANG "''${LANG-}" \
+        --setenv USER "''${USER-}" \
         -- /bin/sh "$@"
     '';
   };
