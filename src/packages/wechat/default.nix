@@ -21,6 +21,8 @@ let
 
         dbus.policies = {
           "org.fcitx.Fcitx5" = "talk";
+          "org.freedesktop.IBus" = "talk";
+          "org.freedesktop.IBus.*" = "talk";
         };
 
         bubblewrap = {
