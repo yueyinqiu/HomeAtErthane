@@ -42,6 +42,14 @@ let
             "/etc/localtime"
             "/etc/egl"
             "/sys"
+            [
+              (sloth.concat' sloth.homeDir "/.config/fcitx5")
+              (sloth.concat' sloth.homeDir "/.config/fcitx5")
+            ]
+            [
+              (sloth.concat' sloth.homeDir "/.local/share/fcitx5/themes")
+              (sloth.concat' sloth.homeDir "/.local/share/fcitx5/themes")
+            ]
           ];
 
           env = {
