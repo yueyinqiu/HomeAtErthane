@@ -24,11 +24,6 @@ let
         };
 
         bubblewrap = {
-          sockets = {
-            x11 = false;
-            pulse = true;
-          };
-
           tmpfs = [ "/tmp" ];
 
           bind.rw = [
@@ -36,7 +31,6 @@ let
               (sloth.mkdir sloth.appDataDir)
               sloth.homeDir
             ]
-            (sloth.concat' sloth.homeDir "/Downloads")
           ];
 
           bind.ro = [
@@ -48,18 +42,6 @@ let
             "/etc/localtime"
             "/etc/egl"
             "/sys"
-            [
-              (sloth.concat' sloth.homeDir "/.pki/nssdb")
-              (sloth.concat' sloth.homeDir "/.pki/nssdb")
-            ]
-            [
-              "${pkgs.bashInteractive}/bin/bash"
-              "/bin/sh"
-            ]
-            [
-              "${pkgs.bashInteractive}/bin/bash"
-              "/bin/bash"
-            ]
           ];
 
           env = {
@@ -69,7 +51,6 @@ let
             WAYLAND_DISPLAY = sloth.envOr "WAYLAND_DISPLAY" "wayland-0";
             GTK_IM_MODULE = "fcitx";
             QT_IM_MODULE = "fcitx";
-            XMODIFIERS = "@im=fcitx";
 
             LD_LIBRARY_PATH = sloth.concat [
               "/run/opengl-driver/lib:/run/opengl-driver-32/lib:"
