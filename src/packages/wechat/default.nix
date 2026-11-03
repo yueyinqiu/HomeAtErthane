@@ -22,6 +22,8 @@ let
         };
 
         bubblewrap = {
+          tmpfs = [ "/tmp" ];
+
           bind.rw = [
             [
               (sloth.mkdir sloth.appDataDir)
