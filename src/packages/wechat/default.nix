@@ -7,7 +7,7 @@ let
 
   wechat = mkNixPak {
     config =
-      { sloth, lib, ... }:
+      { sloth, ... }:
       {
         imports = [
           nixpak.nixpakModules.gui-base
@@ -17,15 +17,11 @@ let
         app.package = pkgs.wechat;
         app.binPath = "bin/wechat";
 
-        gpu.provider = lib.mkForce "nixos";
-
         dbus.policies = {
           "org.fcitx.Fcitx5" = "talk";
         };
 
         bubblewrap = {
-          tmpfs = [ "/tmp" ];
-
           bind.rw = [
             [
               (sloth.mkdir sloth.appDataDir)
@@ -45,17 +41,10 @@ let
           ];
 
           env = {
-            QT_QPA_PLATFORM = "wayland";
             ELECTRON_OZONE_PLATFORM_HINT = "wayland";
             NIXOS_OZONE_WL = "1";
-            WAYLAND_DISPLAY = sloth.envOr "WAYLAND_DISPLAY" "wayland-0";
             GTK_IM_MODULE = "fcitx";
             QT_IM_MODULE = "fcitx";
-
-            LD_LIBRARY_PATH = sloth.concat [
-              "/run/opengl-driver/lib:/run/opengl-driver-32/lib:"
-              (sloth.envOr "LD_LIBRARY_PATH" "")
-            ];
 
             PATH = sloth.concat [
               "${pkgs.coreutils}/bin:${pkgs.bashInteractive}/bin:${pkgs.findutils}/bin:${pkgs.gnugrep}/bin:${pkgs.gnused}/bin:${pkgs.procps}/bin:${pkgs.glibc.bin}/bin:"
