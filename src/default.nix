@@ -1,8 +1,15 @@
-{ ... }: {
-  home.username = "yueyinqiu";
-  home.homeDirectory = "/home/yueyinqiu";
+{ lib, ... }: {
+  options.my.packages = lib.mkOption {
+    type = lib.types.attrsOf lib.types.package;
+    default = { };
+  };
 
-  nixpkgs.config.allowUnfree = true;
+  config = {
+    home.username = "yueyinqiu";
+    home.homeDirectory = "/home/yueyinqiu";
 
-  home.stateVersion = "26.05";
+    nixpkgs.config.allowUnfree = true;
+
+    home.stateVersion = "26.05";
+  };
 }

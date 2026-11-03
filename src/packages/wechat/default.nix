@@ -1,4 +1,4 @@
-{ pkgs, nixpak, ... }:
+{ config, pkgs, nixpak, ... }:
 let
   mkNixPak = nixpak.lib.nixpak {
     inherit (pkgs) lib;
@@ -46,5 +46,6 @@ let
   };
 in
 {
-  home.packages = [ wechat.config.env ];
+  my.packages.wechat = wechat.config.env;
+  home.packages = [ config.my.packages.wechat ];
 }
