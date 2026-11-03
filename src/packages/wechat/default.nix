@@ -43,15 +43,9 @@ let
           ];
 
           env = {
-            ELECTRON_OZONE_PLATFORM_HINT = "wayland";
-            NIXOS_OZONE_WL = "1";
+            # ELECTRON_OZONE_PLATFORM_HINT = "wayland";
             GTK_IM_MODULE = "fcitx";
             QT_IM_MODULE = "fcitx";
-
-            PATH = sloth.concat [
-              "${pkgs.coreutils}/bin:${pkgs.bashInteractive}/bin:${pkgs.findutils}/bin:${pkgs.gnugrep}/bin:${pkgs.gnused}/bin:${pkgs.procps}/bin:${pkgs.glibc.bin}/bin:"
-              (sloth.envOr "PATH" "")
-            ];
           };
         };
       };
