@@ -5,6 +5,7 @@
     extraPackages = [
       pkgs.nodejs_latest
       pkgs.wl-clipboard
+      pkgs.bubblewrap
     ];
 
     context = ''
