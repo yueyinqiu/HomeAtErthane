@@ -33,6 +33,7 @@ let
 
           bind.ro = [
             "/etc/machine-id"
+            "/etc/localtime"
             "/sys"
           ];
 
