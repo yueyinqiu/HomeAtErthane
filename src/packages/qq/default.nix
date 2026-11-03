@@ -17,7 +17,7 @@ let
         };
 
         bubblewrap = {
-          tmpfs = [ "/tmp" ];
+          # tmpfs = [ "/tmp" ];
 
           bind.rw = [
             [
@@ -27,13 +27,13 @@ let
           ];
 
           bind.ro = [
-            "/etc/machine-id"
-            "/etc/localtime"
-            "/sys"
+            # "/etc/machine-id"
+            # "/etc/localtime"
+            # "/sys"
           ];
 
           env = {
-            NIXOS_OZONE_WL = "1";
+            # NIXOS_OZONE_WL = "1";
             GTK_IM_MODULE = "fcitx";
             QT_IM_MODULE = "fcitx";
           };
