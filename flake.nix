@@ -37,6 +37,7 @@
     home-manager-mihomo-manager.url = "github:MihomoManager/HomeManagerMihomoManager";
     baidunetdisk.url = "github:yueyinqiu/BaidunetdiskNix";
     nix-gaming.url = "github:fufexan/nix-gaming";
+    nixpak.url = "github:nixpak/nixpak";
   };
 
   outputs = inputs: {
@@ -55,6 +56,7 @@
           niri = inputs.niri.packages.${system};
           baidunetdisk = inputs.baidunetdisk.packages.${system};
           nix-gaming = inputs.nix-gaming.packages.${system};
+          nixpak = inputs.nixpak;
         };
         modules = [
           inputs.NixVirt.homeModules.default
