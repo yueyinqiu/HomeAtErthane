@@ -34,8 +34,8 @@ let
 
           env = {
             # NIXOS_OZONE_WL = "1";
-            GTK_IM_MODULE = "fcitx";
-            QT_IM_MODULE = "fcitx";
+            # GTK_IM_MODULE = "fcitx";
+            # QT_IM_MODULE = "fcitx";
           };
         };
       };
