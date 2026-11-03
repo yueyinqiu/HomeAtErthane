@@ -4,7 +4,6 @@
       "https://yueyinqiu.cachix.org"
       "https://niri.cachix.org"
       "https://niri-epireyn.cachix.org"
-      "https://nix-gaming.cachix.org"
     ];
   };
 
@@ -30,7 +29,6 @@
     snavi.url = "github:yueyinqiu/Snavi-Nix";
     home-manager-mihomo-manager.url = "github:MihomoManager/HomeManagerMihomoManager";
     baidunetdisk.url = "github:yueyinqiu/BaidunetdiskNix";
-    nix-gaming.url = "github:fufexan/nix-gaming";
     nixpak.url = "github:nixpak/nixpak";
   };
 
@@ -49,7 +47,6 @@
           nix-airgap = inputs.nix-airgap.packages.${system};
           niri = inputs.niri.packages.${system};
           baidunetdisk = inputs.baidunetdisk.packages.${system};
-          nix-gaming = inputs.nix-gaming.packages.${system};
           nixpak = inputs.nixpak;
         };
         modules = [
