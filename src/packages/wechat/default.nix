@@ -25,8 +25,7 @@ let
 
         bubblewrap = {
           sockets = {
-            x11 = true;
-            wayland = lib.mkForce false;
+            x11 = false;
             pulse = true;
           };
 
@@ -64,8 +63,10 @@ let
           ];
 
           env = {
-            DISPLAY = sloth.env "DISPLAY";
-            QT_QPA_PLATFORM = "xcb";
+            QT_QPA_PLATFORM = "wayland";
+            ELECTRON_OZONE_PLATFORM_HINT = "wayland";
+            NIXOS_OZONE_WL = "1";
+            WAYLAND_DISPLAY = sloth.envOr "WAYLAND_DISPLAY" "wayland-0";
             GTK_IM_MODULE = "fcitx";
             QT_IM_MODULE = "fcitx";
             XMODIFIERS = "@im=fcitx";
