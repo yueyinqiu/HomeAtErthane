@@ -13,35 +13,5 @@ in
     };
 
     defaultProfile = "nix-tui";
-
-    patch = [
-      {
-        id = "llm-pi-ai";
-        config = {
-          providers = {
-            tensoris = {
-              apiKeyEnv = "TENSORIS_API_KEY";
-              api = "openai-completions";
-              baseURL = "https://api.tensoris.ai/v1";
-              models = [
-                {
-                  id = "deepseek-v4-pro-0813";
-                  contextWindow = 900000;
-                  maxTokens = 384000;
-                  input = [ "text" ];
-                }
-              ];
-            };
-          };
-        };
-      }
-      {
-        id = "agent-default-model";
-        config = {
-          provider = "tensoris";
-          model = "deepseek-v4-pro-0813";
-        };
-      }
-    ];
   };
 }
