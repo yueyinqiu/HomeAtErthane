@@ -4,6 +4,7 @@
       "https://yueyinqiu.cachix.org"
       "https://niri.cachix.org"
       "https://niri-epireyn.cachix.org"
+      "https://deepseek-harness-nix.cachix.org"
     ];
   };
 
@@ -30,6 +31,7 @@
     home-manager-mihomo-manager.url = "github:MihomoManager/HomeManagerMihomoManager";
     baidunetdisk.url = "github:yueyinqiu/BaidunetdiskNix";
     nixpak.url = "github:nixpak/nixpak";
+    deepseek-harness.url = "github:moraxyc/deepseek-harness.nix";
   };
 
   outputs = inputs: {
@@ -55,6 +57,7 @@
           inputs.sub-nix.homeManagerModules.sub-nix
           inputs.snavi.homeManagerModules.snavi
           inputs.home-manager-mihomo-manager.homeManagerModules.home-manager-mihomo-manager
+          inputs.deepseek-harness.homeModules.default
           (inputs.import-tree ./src)
         ];
       };
