@@ -38,6 +38,11 @@ let
             (sloth.concat' sloth.homeDir "/Downloads")
           ];
 
+          bind.ro = [
+            "/etc/machine-id"
+            "/sys/devices/system/cpu"
+          ];
+
           env = {
             DISPLAY = sloth.env "DISPLAY";
             QT_QPA_PLATFORM = "xcb";
