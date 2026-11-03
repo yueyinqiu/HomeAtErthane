@@ -5,8 +5,6 @@
     extraPackages = [
       pkgs.nodejs_latest
       pkgs.wl-clipboard
-      pkgs.bubblewrap
-      pkgs.socat
     ];
 
     context = ''
@@ -35,7 +33,6 @@
       defaultModel = "deepseek-v4-pro";
       defaultThinkingLevel = "low";
       packages = [
-        "npm:@xzzpig/pi-sandbox"
       ];
     };
 
