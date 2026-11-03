@@ -21,8 +21,6 @@ let
 
         dbus.policies = {
           "org.fcitx.Fcitx5" = "talk";
-          "org.freedesktop.IBus" = "talk";
-          "org.freedesktop.IBus.*" = "talk";
         };
 
         bubblewrap = {
@@ -44,14 +42,6 @@ let
             "/etc/localtime"
             "/etc/egl"
             "/sys"
-            [
-              (sloth.concat' sloth.homeDir "/.config/fcitx5")
-              (sloth.concat' sloth.homeDir "/.config/fcitx5")
-            ]
-            [
-              (sloth.concat' sloth.homeDir "/.local/share/fcitx5/themes")
-              (sloth.concat' sloth.homeDir "/.local/share/fcitx5/themes")
-            ]
           ];
 
           env = {
@@ -59,6 +49,8 @@ let
             ELECTRON_OZONE_PLATFORM_HINT = "wayland";
             NIXOS_OZONE_WL = "1";
             WAYLAND_DISPLAY = sloth.envOr "WAYLAND_DISPLAY" "wayland-0";
+            GTK_IM_MODULE = "fcitx";
+            QT_IM_MODULE = "fcitx";
 
             LD_LIBRARY_PATH = sloth.concat [
               "/run/opengl-driver/lib:/run/opengl-driver-32/lib:"
