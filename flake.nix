@@ -50,6 +50,7 @@
           niri = inputs.niri.packages.${system};
           baidunetdisk = inputs.baidunetdisk.packages.${system};
           nixpak = inputs.nixpak;
+          deepseek-harness = inputs.deepseek-harness.packages.${system};
         };
         modules = [
           inputs.NixVirt.homeModules.default
