@@ -47,7 +47,7 @@ let
 
           bind.ro = [
             "/etc/machine-id"
-            "/sys/devices/system/cpu"
+            "/sys"
             [
               (sloth.concat' sloth.homeDir "/.pki/nssdb")
               (sloth.concat' sloth.homeDir "/.pki/nssdb")
