@@ -5,16 +5,10 @@ let
     inherit pkgs;
   };
 
-  wechatNoSandbox = pkgs.symlinkJoin {
-    name = "wechat-no-sandbox";
-    paths = [ pkgs.wechat ];
-    postBuild = ''
-      mv "$out/bin/wechat" "$out/bin/.wechat-orig"
-      cat > "$out/bin/wechat" <<'EOF'
-#!/bin/sh
-exec "$(dirname "$0")/.wechat-orig" --no-sandbox --disable-gpu-sandbox "$@"
-EOF
-      chmod +x "$out/bin/wechat"
+  wechatNoSandbox = pkgs.writeShellApplication {
+    name = "wechat";
+    text = ''
+      exec ${pkgs.wechat}/bin/wechat --no-sandbox --disable-gpu-sandbox "$@"
     '';
   };
 
