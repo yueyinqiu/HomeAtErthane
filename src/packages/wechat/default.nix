@@ -8,7 +8,7 @@ let
   wechatNoSandbox = pkgs.writeShellApplication {
     name = "wechat";
     text = ''
-      exec ${pkgs.wechat}/bin/wechat --no-sandbox --disable-gpu-sandbox "$@"
+      exec ${pkgs.wechat}/bin/wechat --disable-gpu "$@"
     '';
   };
 
