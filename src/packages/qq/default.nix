@@ -17,8 +17,6 @@ let
         };
 
         bubblewrap = {
-          # tmpfs = [ "/tmp" ];
-
           bind.rw = [
             [
               (sloth.mkdir sloth.appDataDir)
@@ -27,14 +25,11 @@ let
           ];
 
           bind.ro = [
-            "/etc"
-            # "/sys"
+            # "/etc"
           ];
 
           env = {
             NIXOS_OZONE_WL = "1";
-            # GTK_IM_MODULE = "fcitx";
-            # QT_IM_MODULE = "fcitx";
           };
         };
       };
