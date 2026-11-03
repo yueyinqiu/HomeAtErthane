@@ -27,8 +27,7 @@ let
           ];
 
           bind.ro = [
-            "/etc/machine-id"
-            "/etc/localtime"
+            "/etc"
             "/sys"
           ];
 
