@@ -20,6 +20,7 @@ in
         config = {
           providers = {
             tensoris = {
+              apiKeyEnv = "TENSORIS_API_KEY";
               api = "openai-completions";
               baseURL = "https://api.tensoris.ai/v1";
               models = [
