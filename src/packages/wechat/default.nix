@@ -5,13 +5,6 @@ let
     inherit pkgs;
   };
 
-  wechatNoSandbox = pkgs.writeShellApplication {
-    name = "wechat";
-    text = ''
-      exec ${pkgs.wechat}/bin/wechat --disable-gpu "$@"
-    '';
-  };
-
   wechat = mkNixPak {
     config =
       { sloth, lib, ... }:
@@ -21,8 +14,10 @@ let
           nixpak.nixpakModules.network
         ];
 
-        app.package = wechatNoSandbox;
+        app.package = pkgs.wechat;
         app.binPath = "bin/wechat";
+
+        gpu.provider = lib.mkForce "nixos";
 
         dbus.policies = {
           "org.fcitx.Fcitx5" = "talk";
