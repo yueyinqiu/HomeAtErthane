@@ -3,7 +3,7 @@
   ...
 }:
 {
-  xdg.configFile."nix/access-tokens.conf.example" = ''
+  xdg.configFile."nix/access-tokens.conf.example".text = ''
     access-tokens = github.com=ghp_XXXXXX
   '';
   nix.extraOptions = ''
