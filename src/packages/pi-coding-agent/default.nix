@@ -6,6 +6,7 @@
       pkgs.nodejs_latest
       pkgs.wl-clipboard
       pkgs.bubblewrap
+      pkgs.socat
     ];
 
     context = ''
