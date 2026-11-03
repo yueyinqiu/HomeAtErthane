@@ -33,12 +33,6 @@ let
 
           bind.ro = [
             "/etc/machine-id"
-            "/etc/passwd"
-            "/etc/group"
-            "/etc/os-release"
-            "/etc/lsb-release"
-            "/etc/localtime"
-            "/etc/egl"
             "/sys"
           ];
 
