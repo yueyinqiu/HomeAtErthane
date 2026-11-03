@@ -1,6 +1,40 @@
-{ ... }: {
+{ pkgs, ... }:
+let
+  sandboxShell = pkgs.writeShellApplication {
+    name = "opencode-sandbox-shell";
+    text = ''
+      ROOT="''${OPENCODE_SANDBOX_ROOT:-$PWD}"
+      exec ${pkgs.bubblewrap}/bin/bwrap \
+        --unshare-user --unshare-ipc --unshare-pid --unshare-uts --unshare-cgroup \
+        --die-with-parent \
+        --new-session \
+        --ro-bind /nix /nix \
+        --ro-bind /bin /bin \
+        --ro-bind /usr /usr \
+        --ro-bind /etc /etc \
+        --ro-bind /run /run \
+        --bind "$ROOT" "$ROOT" \
+        --tmpfs /tmp \
+        --dev /dev \
+        --proc /proc \
+        --chdir "$ROOT" \
+        --clearenv \
+        --setenv PATH "/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:/usr/bin:/bin" \
+        --setenv HOME "$ROOT" \
+        --setenv TERM "''${TERM:-xterm-256color}" \
+        --setenv LANG "''${LANG:-C.UTF-8}" \
+        --setenv USER "''${USER:-yueyinqiu}" \
+        -- /bin/sh "$@"
+    '';
+  };
+in
+{
   programs.opencode = {
     enable = true;
+
+    cli = {
+      tabs.mode = "off";
+    };
 
     context = ''
       # Host Context
@@ -22,10 +56,7 @@
 
       - **Do not** touch the git repository of the user's project. The user uses git to track your own changes, so you must not run any git operations (commit/push/pull, etc.) against the project's repo.
     '';
-    cli = {
-      tabs.mode = "off";
-    };
-    
+
     settings = {
       provider = {
         tensoris = {
@@ -82,6 +113,7 @@
       };
 
       model = "tensoris/deepseek-v4-pro-0813";
+      shell = "${sandboxShell}/bin/opencode-sandbox-shell";
     };
   };
 
