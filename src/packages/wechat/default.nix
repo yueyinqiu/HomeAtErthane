@@ -37,7 +37,6 @@ let
           ];
 
           env = {
-            # ELECTRON_OZONE_PLATFORM_HINT = "wayland";
             GTK_IM_MODULE = "fcitx";
             QT_IM_MODULE = "fcitx";
           };
