@@ -65,7 +65,10 @@
                 output = 384000;
               };
               modalities = {
-                input = [ "text" "image" ];
+                input = [
+                  "text"
+                  "image"
+                ];
               };
               options = {
                 reasoningEffort = "low";
@@ -78,4 +81,10 @@
       model = "tensoris/deepseek-v4-pro-0813";
     };
   };
+
+  xdg.configFile."opencode/service.json".text = ''
+    {
+      "disabled": true
+    }
+  '';
 }
