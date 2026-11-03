@@ -7,7 +7,7 @@ let
 
   wechat = mkNixPak {
     config =
-      { sloth, ... }:
+      { sloth, lib, ... }:
       {
         imports = [
           nixpak.nixpakModules.gui-base
@@ -24,6 +24,7 @@ let
         bubblewrap = {
           sockets = {
             x11 = true;
+            wayland = lib.mkForce false;
             pulse = true;
           };
 
@@ -38,7 +39,6 @@ let
           ];
 
           env = {
-            WAYLAND_DISPLAY = null;
             DISPLAY = sloth.env "DISPLAY";
             QT_QPA_PLATFORM = "xcb";
             GTK_IM_MODULE = "fcitx";
