@@ -13,10 +13,9 @@ let
         -- /bin/sh "$@"
     '';
   };
-in
-{
-  my.packages.opencode = pkgs.writeShellApplication {
-    name = "opencode";
+
+  sandboxed = pkgs.writeShellApplication {
+    name = "opencode-sandbox";
     text = ''
       extra_args=()
       if [ -n "''${OPENCODE_RW_DIRS-}" ]; then
@@ -40,6 +39,18 @@ in
         --tmpfs ${home}/.ssh \
         --ro-bind /dev/null ${home}/.pi/agent/auth.json \
         -- ${pkgs.opencode}/bin/opencode "$@"
+    '';
+  };
+in
+{
+  my.packages.opencode = pkgs.symlinkJoin {
+    name = "opencode";
+    paths = [ pkgs.opencode ];
+    version = pkgs.opencode.version;
+    postBuild = ''
+      rm "$out/bin/opencode"
+      cp ${sandboxed}/bin/opencode-sandbox "$out/bin/opencode"
+      chmod +x "$out/bin/opencode"
     '';
   };
 
