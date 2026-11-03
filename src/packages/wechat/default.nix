@@ -1,11 +1,6 @@
-{ config, pkgs, nixpak, ... }:
+{ config, nixpak, pkgs, ... }:
 let
-  mkNixPak = nixpak.lib.nixpak {
-    inherit (pkgs) lib;
-    inherit pkgs;
-  };
-
-  wechat = mkNixPak {
+  wechat = config.my.lib.mkNixPak {
     config =
       { sloth, ... }:
       {

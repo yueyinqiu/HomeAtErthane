@@ -1,7 +1,14 @@
 { lib, ... }: {
-  options.my.packages = lib.mkOption {
-    type = lib.types.attrsOf lib.types.package;
-    default = { };
+  options.my = {
+    packages = lib.mkOption {
+      type = lib.types.attrsOf lib.types.package;
+      default = { };
+    };
+
+    lib = lib.mkOption {
+      type = lib.types.attrs;
+      default = { };
+    };
   };
 
   config = {
