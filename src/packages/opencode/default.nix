@@ -27,6 +27,7 @@
       provider = {
         tensoris = {
           name = "Tensoris";
+          npm = "@ai-sdk/openai-compatible";
           options = {
             baseURL = "https://api.tensoris.ai/v1";
           };
@@ -52,6 +53,7 @@
 
         tongji = {
           name = "Tongji";
+          npm = "@ai-sdk/openai-compatible";
           options = {
             baseURL = "https://agi.tongji.edu.cn/v1";
           };
