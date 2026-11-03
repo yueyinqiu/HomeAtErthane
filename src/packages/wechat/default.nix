@@ -59,8 +59,6 @@ let
             ELECTRON_OZONE_PLATFORM_HINT = "wayland";
             NIXOS_OZONE_WL = "1";
             WAYLAND_DISPLAY = sloth.envOr "WAYLAND_DISPLAY" "wayland-0";
-            GTK_IM_MODULE = "fcitx";
-            QT_IM_MODULE = "fcitx";
 
             LD_LIBRARY_PATH = sloth.concat [
               "/run/opengl-driver/lib:/run/opengl-driver-32/lib:"
