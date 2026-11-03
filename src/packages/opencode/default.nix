@@ -1,30 +1,35 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 let
-  sandboxShell = pkgs.writeShellApplication {
+  bwrap = pkgs.bubblewrap;
+  home = config.home.homeDirectory;
+
+  innerShell = pkgs.writeShellApplication {
     name = "opencode-sandbox-shell";
     text = ''
-      PROJECT="''${OPENCODE_SANDBOX_ROOT:-$PWD}"
-      exec ${pkgs.bubblewrap}/bin/bwrap \
-        --unshare-user --unshare-ipc --unshare-pid --unshare-uts --unshare-cgroup \
-        --die-with-parent \
-        --new-session \
-        --ro-bind /nix /nix \
-        --ro-bind /bin /bin \
-        --ro-bind /usr /usr \
-        --ro-bind /etc /etc \
-        --ro-bind /run /run \
-        --bind "$PROJECT" "$PROJECT" \
-        --tmpfs /tmp \
-        --dev /dev \
-        --proc /proc \
-        --chdir "$PROJECT" \
-        --clearenv \
-        --setenv PATH "/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:/usr/bin:/bin" \
-        --setenv HOME "$HOME" \
-        --setenv TERM "''${TERM-}" \
-        --setenv LANG "''${LANG-}" \
-        --setenv USER "''${USER-}" \
+      exec ${bwrap}/bin/bwrap \
+        --unshare-user \
+        --bind / / \
+        --dev /dev --proc /proc \
+        --tmpfs ${home}/.local/share/opencode \
         -- /bin/sh "$@"
+    '';
+  };
+
+  opencodeSandboxed = pkgs.writeShellApplication {
+    name = "opencode-sandboxed";
+    text = ''
+      exec ${bwrap}/bin/bwrap \
+        --unshare-user --unshare-ipc --unshare-pid --unshare-uts --unshare-cgroup \
+        --ro-bind / / \
+        --dev /dev --proc /proc \
+        --tmpfs /tmp \
+        --bind "$PWD" "$PWD" \
+        --bind ${home}/.local/share/opencode ${home}/.local/share/opencode \
+        --bind ${home}/.local/state/opencode ${home}/.local/state/opencode \
+        --bind ${home}/.cache ${home}/.cache \
+        --tmpfs ${home}/.ssh \
+        --ro-bind /dev/null ${home}/.pi/agent/auth.json \
+        -- ${pkgs.opencode}/bin/opencode "$@"
     '';
   };
 in
@@ -113,9 +118,11 @@ in
       };
 
       model = "tensoris/deepseek-v4-pro-0813";
-      shell = "${sandboxShell}/bin/opencode-sandbox-shell";
+      shell = "${innerShell}/bin/opencode-sandbox-shell";
     };
   };
+
+  home.packages = [ opencodeSandboxed ];
 
   xdg.configFile."opencode/service.json".text = ''
     {
