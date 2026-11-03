@@ -1,20 +1,54 @@
-{ pkgs, config, ... }:
+{ pkgs, nixpak, ... }:
+let
+  mkNixPak = nixpak.lib.nixpak {
+    inherit (pkgs) lib;
+    inherit pkgs;
+  };
+
+  wechat = mkNixPak {
+    config =
+      { sloth, ... }:
+      {
+        imports = [
+          nixpak.nixpakModules.gui-base
+          nixpak.nixpakModules.network
+        ];
+
+        app.package = pkgs.wechat;
+        app.binPath = "bin/wechat";
+
+        dbus.policies = {
+          "org.fcitx.Fcitx5" = "talk";
+        };
+
+        bubblewrap = {
+          sockets = {
+            x11 = true;
+            pulse = true;
+          };
+
+          tmpfs = [ "/tmp" ];
+
+          bind.rw = [
+            [
+              (sloth.mkdir sloth.appDataDir)
+              sloth.homeDir
+            ]
+            (sloth.concat' sloth.homeDir "/Downloads")
+          ];
+
+          env = {
+            WAYLAND_DISPLAY = null;
+            DISPLAY = sloth.env "DISPLAY";
+            QT_QPA_PLATFORM = "xcb";
+            GTK_IM_MODULE = "fcitx";
+            QT_IM_MODULE = "fcitx";
+            XMODIFIERS = "@im=fcitx";
+          };
+        };
+      };
+  };
+in
 {
-  home.packages = [
-    (pkgs.symlinkJoin {
-      name = "wechat-fcitx";
-      paths = [ pkgs.wechat ];
-      buildInputs = [ pkgs.makeWrapper ];
-      # https://zhuanlan.zhihu.com/p/2051087997395808628
-      postBuild = ''
-        wrapProgram $out/bin/wechat \
-          --unset WAYLAND_DISPLAY \
-          --set DISPLAY ":0" \
-          --set QT_QPA_PLATFORM "xcb" \
-          --set GTK_IM_MODULE "fcitx" \
-          --set QT_IM_MODULE "fcitx" \
-          --set XMODIFIERS "@im=fcitx"
-      '';
-    })
-  ];
+  home.packages = [ wechat.config.env ];
 }
