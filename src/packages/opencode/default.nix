@@ -66,6 +66,8 @@ let
       after=$(nix profile list)
       if [ "$before" != "$after" ]; then
         echo "!! nix profile changed during opencode session"
+        echo "!! nix profile changed during opencode session"
+        echo "!! nix profile changed during opencode session"
         if [ -t 0 ]; then
           read -r -p "press Enter after checking/rolling back... " _
         fi
