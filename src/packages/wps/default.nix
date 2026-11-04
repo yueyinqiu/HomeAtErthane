@@ -1,5 +1,6 @@
 { config, nixpak, pkgs, ... }:
 let
+  home = config.home.homeDirectory;
   wps = config.my.lib.mkNixPak {
     config =
       { sloth, ... }:
@@ -18,18 +19,12 @@ let
 
         bubblewrap = {
           bind.rw = [
-            [
-              (sloth.mkdir sloth.appDataDir)
-              sloth.homeDir
-            ]
+            home
           ];
 
           bind.ro = [
             "/etc"
-            [
-              "${pkgs.bash}/bin/bash"
-              "/bin/sh"
-            ]
+            "/bin"
           ];
 
           env = {
