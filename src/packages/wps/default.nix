@@ -22,6 +22,10 @@ let
               (sloth.mkdir sloth.appDataDir)
               sloth.homeDir
             ]
+            [
+              sloth.homeDir
+              "${sloth.homeDir}/home"
+            ]
           ];
 
           bind.ro = [
