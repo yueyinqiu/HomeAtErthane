@@ -5,7 +5,7 @@ let
   shell = pkgs.writeShellApplication {
     name = "opencode-sandbox-shell";
     text = ''
-      before=$(nix profile list 2>/dev/null || true)
+      before=$(nix profile list)
       set +e
       ${pkgs.bubblewrap}/bin/bwrap \
         --unshare-user \
@@ -15,9 +15,10 @@ let
         -- ${config.my.packages.bash}/bin/bash "$@"
       rc=$?
       set -e
-      after=$(nix profile list 2>/dev/null || true)
+      after=$(nix profile list)
       if [ "$before" != "$after" ]; then
-        kill -9 "$PPID" 2>/dev/null || true
+        echo "!! nix profile changed — killing opencode" >&2
+        kill -9 "$PPID"
       fi
       exit "$rc"
     '';
