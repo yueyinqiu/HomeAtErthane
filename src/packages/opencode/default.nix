@@ -17,7 +17,7 @@ let
       set -e
       after=$(nix profile list)
       if [ "$before" != "$after" ]; then
-        echo "!! nix profile changed — killing opencode" >&2
+        echo "!! nix profile changed — killing opencode"
         kill -9 "$PPID"
       fi
       exit "$rc"
