@@ -57,6 +57,7 @@ let
         --bind ${config.xdg.dataHome}/opencode ${config.xdg.dataHome}/opencode \
         --bind ${config.xdg.stateHome}/opencode ${config.xdg.stateHome}/opencode \
         --ro-bind ${config.xdg.configHome}/opencode ${config.xdg.configHome}/opencode \
+        --ro-bind ${config.xdg.configHome}/git ${config.xdg.configHome}/git \
         --dev /dev --proc /proc \
         "''${args[@]}" \
         -- ${pkgs.opencode}/bin/opencode "$@"
@@ -64,7 +65,10 @@ let
       set -e
       after=$(nix profile list)
       if [ "$before" != "$after" ]; then
-        echo "!! nix profile changed during opencode session" >&2
+        echo "!! nix profile changed during opencode session"
+        if [ -t 0 ]; then
+          read -r -p "press Enter after checking/rolling back... " _
+        fi
       fi
       exit "$rc"
     '';
