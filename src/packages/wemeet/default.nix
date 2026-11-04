@@ -2,7 +2,7 @@
 let
   app = config.my.lib.mkNixPak {
     config =
-      { sloth, ... }:
+      { sloth, lib, ... }:
       {
         imports = [
           nixpak.nixpakModules.gui-base
@@ -12,7 +12,7 @@ let
         app.package = pkgs.wemeet;
         app.binPath = "bin/wemeet-xwayland";
 
-        gpu.provider = "nixos";
+        gpu.provider = lib.mkForce "nixos";
 
         dbus.policies = {
           "org.fcitx.Fcitx5" = "talk";
