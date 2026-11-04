@@ -17,6 +17,7 @@ let
         };
 
         bubblewrap = {
+          shareIpc = true;
           sockets.x11 = true;
 
           bind.rw = [
