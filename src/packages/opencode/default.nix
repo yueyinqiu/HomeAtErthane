@@ -11,7 +11,9 @@ let
         --unshare-user \
         --bind / / \
         --dev /dev --proc /proc \
-        --tmpfs ${home}/.local/share/opencode \
+        --tmpfs ${config.xdg.configHome}/opencode \
+        --tmpfs ${config.xdg.dataHome}/opencode \
+        --tmpfs ${config.xdg.stateHome}/opencode \
         -- ${config.my.packages.bash}/bin/bash "$@"
       rc=$?
       set -e
@@ -42,9 +44,10 @@ let
         --ro-bind /etc /etc \
         --ro-bind /run/current-system /run/current-system \
         --ro-bind ${home}/.nix-profile ${home}/.nix-profile \
-        --ro-bind ${home}/.local/state/nix/profiles ${home}/.local/state/nix/profiles \
-        --bind ${home}/.local/share/opencode ${home}/.local/share/opencode \
-        --bind ${home}/.local/state/opencode ${home}/.local/state/opencode \
+        --ro-bind ${config.xdg.stateHome}/nix/profiles ${config.xdg.stateHome}/nix/profiles \
+        --bind ${config.xdg.dataHome}/opencode ${config.xdg.dataHome}/opencode \
+        --bind ${config.xdg.stateHome}/opencode ${config.xdg.stateHome}/opencode \
+        --ro-bind ${config.xdg.configHome}/opencode ${config.xdg.configHome}/opencode \
         --dev /dev --proc /proc \
         "''${extra_args[@]}" \
         -- ${pkgs.opencode}/bin/opencode "$@"
