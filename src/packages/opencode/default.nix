@@ -44,7 +44,7 @@ let
       done
       unset IFS
       exec ${pkgs.bubblewrap}/bin/bwrap \
-        --unshare-user --uid 100000 --gid 100000 \
+        --unshare-user \
         --unshare-ipc --unshare-pid --unshare-uts --unshare-cgroup \
         --ro-bind /nix /nix \
         --ro-bind /usr /usr \
