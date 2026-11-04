@@ -65,14 +65,15 @@ let
       set -e
       after=$(nix profile list)
       if [ "$before" != "$after" ]; then
+        ${pkgs.libnotify}/bin/notify-send -u critical -a opencode \
+          "nix profile changed" "check: nix profile list" || true
         if [ -t 0 ] && [ -t 2 ]; then
-          printf '\a\e[1;31m' >&2
+          printf '\n\n\n\n'
           printf '%s\n' \
-            '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!' \
+            '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!' \
             '!!  NIX PROFILE CHANGED DURING THIS SESSION  !!' \
             '!!  a package may now shadow your commands   !!' \
-            '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!' >&2
-          printf '\e[0m' >&2
+            '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!' >&2
           printf 'inspect: nix profile list   revert: nix profile rollback\n' >&2
           read -r -p 'press Enter when ready... ' _
         else
