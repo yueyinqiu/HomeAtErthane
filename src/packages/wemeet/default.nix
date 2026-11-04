@@ -12,6 +12,8 @@ let
         app.package = pkgs.wemeet;
         app.binPath = "bin/wemeet-xwayland";
 
+        gpu.provider = "nixos";
+
         dbus.policies = {
           "org.fcitx.Fcitx5" = "talk";
         };
