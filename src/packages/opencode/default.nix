@@ -6,14 +6,20 @@ let
     name = "opencode-sandbox-shell";
     text = ''
       before=$(nix profile list)
+      args=()
+      if [ -z "''${OPENCODE_SANDBOX_ALLOW_OPENCODE_CONFIG:-}" ]; then
+        args+=(
+          --tmpfs ${config.xdg.configHome}/opencode
+          --tmpfs ${config.xdg.dataHome}/opencode
+          --tmpfs ${config.xdg.stateHome}/opencode
+        )
+      fi
       set +e
       ${pkgs.bubblewrap}/bin/bwrap \
         --unshare-user \
         --bind / / \
         --dev /dev --proc /proc \
-        --tmpfs ${config.xdg.configHome}/opencode \
-        --tmpfs ${config.xdg.dataHome}/opencode \
-        --tmpfs ${config.xdg.stateHome}/opencode \
+        "''${args[@]}" \
         -- ${config.my.packages.bash}/bin/bash "$@"
       rc=$?
       set -e
@@ -29,11 +35,11 @@ let
   sandboxed = pkgs.writeShellApplication {
     name = "opencode-sandbox";
     text = ''
-      extra_args=()
+      args=()
       IFS=':'
       for d in ''${OPENCODE_SANDBOX_DIRECTORIES:-$PWD}; do
         if [ -n "$d" ]; then
-          extra_args+=(--bind "$d" "$d")
+          args+=(--bind "$d" "$d")
         fi
       done
       exec ${pkgs.bubblewrap}/bin/bwrap \
@@ -49,7 +55,7 @@ let
         --bind ${config.xdg.stateHome}/opencode ${config.xdg.stateHome}/opencode \
         --ro-bind ${config.xdg.configHome}/opencode ${config.xdg.configHome}/opencode \
         --dev /dev --proc /proc \
-        "''${extra_args[@]}" \
+        "''${args[@]}" \
         -- ${pkgs.opencode}/bin/opencode "$@"
     '';
   };
