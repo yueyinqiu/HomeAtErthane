@@ -24,7 +24,7 @@ let
             ]
             [
               sloth.homeDir
-              "${sloth.homeDir}/home"
+              (sloth.concat' sloth.homeDir "/home")
             ]
           ];
 
