@@ -65,11 +65,18 @@ let
       set -e
       after=$(nix profile list)
       if [ "$before" != "$after" ]; then
-        echo "!! nix profile changed during opencode session"
-        echo "!! nix profile changed during opencode session"
-        echo "!! nix profile changed during opencode session"
-        if [ -t 0 ]; then
-          read -r -p "press Enter after checking/rolling back... " _
+        if [ -t 0 ] && [ -t 2 ]; then
+          printf '\a\e[1;31m' >&2
+          printf '%s\n' \
+            '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!' \
+            '!!  NIX PROFILE CHANGED DURING THIS SESSION  !!' \
+            '!!  a package may now shadow your commands   !!' \
+            '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!' >&2
+          printf '\e[0m' >&2
+          printf 'inspect: nix profile list   revert: nix profile rollback\n' >&2
+          read -r -p 'press Enter when ready... ' _
+        else
+          echo '!! nix profile changed during opencode session' >&2
         fi
       fi
       exit "$rc"
