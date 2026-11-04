@@ -28,16 +28,18 @@ let
       fi
       exec ${pkgs.bubblewrap}/bin/bwrap \
         "''${extra_args[@]}" \
-        --unshare-user --unshare-ipc --unshare-pid --unshare-uts --unshare-cgroup \
-        --ro-bind / / \
-        --dev /dev --proc /proc \
-        --tmpfs /tmp \
-        --bind "$PWD" "$PWD" \
+        --unshare-user --uid 100000 --gid 100000 \
+        --unshare-ipc --unshare-pid --unshare-uts --unshare-cgroup \
+        --ro-bind /nix /nix \
+        --ro-bind /usr /usr \
+        --ro-bind /etc /etc \
+        --ro-bind /run/current-system /run/current-system \
+        --ro-bind ${home}/.nix-profile ${home}/.nix-profile \
+        --ro-bind ${home}/.local/state/nix/profiles/profile ${home}/.local/state/nix/profiles/profile \
         --bind ${home}/.local/share/opencode ${home}/.local/share/opencode \
         --bind ${home}/.local/state/opencode ${home}/.local/state/opencode \
-        --bind ${home}/.cache ${home}/.cache \
-        --tmpfs ${home}/.ssh \
-        --ro-bind /dev/null ${home}/.pi/agent/auth.json \
+        --dev /dev --proc /proc \
+        --bind "$PWD" "$PWD" \
         -- ${pkgs.opencode}/bin/opencode "$@"
     '';
   };
