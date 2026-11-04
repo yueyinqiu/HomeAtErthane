@@ -28,16 +28,13 @@ let
     name = "opencode-sandbox";
     text = ''
       extra_args=()
-      if [ -n "''${OPENCODE_RW_DIRS-}" ]; then
-        IFS=':' read -r -a dirs <<< "$OPENCODE_RW_DIRS"
-        for d in "''${dirs[@]}"; do
-          if [ -n "$d" ]; then
-            extra_args+=(--bind "$d" "$d")
-          fi
-        done
-      fi
+      IFS=':'
+      for d in ''${OPENCODE_SANDBOX_DIRECTORIES:-PWD}; do
+        if [ -n "$d" ]; then
+          extra_args+=(--bind "$d" "$d")
+        fi
+      done
       exec ${pkgs.bubblewrap}/bin/bwrap \
-        "''${extra_args[@]}" \
         --unshare-user --uid 100000 --gid 100000 \
         --unshare-ipc --unshare-pid --unshare-uts --unshare-cgroup \
         --ro-bind /nix /nix \
@@ -49,7 +46,7 @@ let
         --bind ${home}/.local/share/opencode ${home}/.local/share/opencode \
         --bind ${home}/.local/state/opencode ${home}/.local/state/opencode \
         --dev /dev --proc /proc \
-        --bind "$PWD" "$PWD" \
+        "''${extra_args[@]}" \
         -- ${pkgs.opencode}/bin/opencode "$@"
     '';
   };
