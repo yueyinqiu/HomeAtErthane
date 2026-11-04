@@ -35,6 +35,7 @@ let
   sandboxed = pkgs.writeShellApplication {
     name = "opencode-sandbox";
     text = ''
+      before=$(nix profile list)
       args=()
       IFS=':'
       for d in ''${OPENCODE_SANDBOX_DIRECTORIES:-$PWD}; do
@@ -43,7 +44,8 @@ let
         fi
       done
       unset IFS
-      exec ${pkgs.bubblewrap}/bin/bwrap \
+      set +e
+      ${pkgs.bubblewrap}/bin/bwrap \
         --unshare-user \
         --unshare-ipc --unshare-pid --unshare-uts --unshare-cgroup \
         --ro-bind /nix /nix \
@@ -58,6 +60,13 @@ let
         --dev /dev --proc /proc \
         "''${args[@]}" \
         -- ${pkgs.opencode}/bin/opencode "$@"
+      rc=$?
+      set -e
+      after=$(nix profile list)
+      if [ "$before" != "$after" ]; then
+        echo "!! nix profile changed during opencode session" >&2
+      fi
+      exit "$rc"
     '';
   };
 in
