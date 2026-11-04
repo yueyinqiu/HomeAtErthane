@@ -5,12 +5,21 @@ let
   shell = pkgs.writeShellApplication {
     name = "opencode-sandbox-shell";
     text = ''
-      exec ${pkgs.bubblewrap}/bin/bwrap \
+      before=$(nix profile list 2>/dev/null || true)
+      set +e
+      ${pkgs.bubblewrap}/bin/bwrap \
         --unshare-user \
         --bind / / \
         --dev /dev --proc /proc \
         --tmpfs ${home}/.local/share/opencode \
         -- ${config.my.packages.bash}/bin/bash "$@"
+      rc=$?
+      set -e
+      after=$(nix profile list 2>/dev/null || true)
+      if [ "$before" != "$after" ]; then
+        kill -9 "$PPID" 2>/dev/null || true
+      fi
+      exit "$rc"
     '';
   };
 
