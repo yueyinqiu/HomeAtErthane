@@ -42,6 +42,7 @@ let
           args+=(--bind "$d" "$d")
         fi
       done
+      unset IFS
       exec ${pkgs.bubblewrap}/bin/bwrap \
         --unshare-user --uid 100000 --gid 100000 \
         --unshare-ipc --unshare-pid --unshare-uts --unshare-cgroup \
