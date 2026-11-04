@@ -26,6 +26,10 @@ let
 
           bind.ro = [
             "/etc"
+            [
+              "${pkgs.bash}/bin/bash"
+              "/bin/sh"
+            ]
           ];
 
           env = {
