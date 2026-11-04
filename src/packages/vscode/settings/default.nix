@@ -59,7 +59,6 @@
       "window.restoreWindows" = "none";
 
       "chat.disableAIFeatures" = true;
-      "direnv.watchForChanges" = false;
     };
   };
 }
