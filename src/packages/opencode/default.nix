@@ -29,7 +29,7 @@ let
     text = ''
       extra_args=()
       IFS=':'
-      for d in ''${OPENCODE_SANDBOX_DIRECTORIES:-PWD}; do
+      for d in ''${OPENCODE_SANDBOX_DIRECTORIES:-$PWD}; do
         if [ -n "$d" ]; then
           extra_args+=(--bind "$d" "$d")
         fi
