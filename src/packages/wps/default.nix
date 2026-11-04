@@ -1,17 +1,43 @@
-{ pkgs, config, ... }:
+{ config, nixpak, pkgs, ... }:
+let
+  wps = config.my.lib.mkNixPak {
+    config =
+      { sloth, ... }:
+      {
+        imports = [
+          nixpak.nixpakModules.gui-base
+          nixpak.nixpakModules.network
+        ];
+
+        app.package = pkgs.wpsoffice-cn;
+        app.binPath = "bin/wps";
+
+        dbus.policies = {
+          "org.fcitx.Fcitx5" = "talk";
+        };
+
+        bubblewrap = {
+          bind.rw = [
+            [
+              (sloth.mkdir sloth.appDataDir)
+              sloth.homeDir
+            ]
+          ];
+
+          bind.ro = [
+            "/etc"
+          ];
+
+          env = {
+            GTK_IM_MODULE = "fcitx";
+            QT_IM_MODULE = "fcitx";
+            SDL_IM_MODULE = "fcitx";
+          };
+        };
+      };
+  };
+in
 {
-  # https://github.com/Beriholic/nix-wpsoffice-cn/issues/1#issuecomment-3706931491
-  home.packages = [
-    (pkgs.symlinkJoin {
-      name = "wps-fcitx";
-      paths = [ pkgs.wpsoffice-cn ];
-      buildInputs = [ pkgs.makeWrapper ];
-      postBuild = ''
-        wrapProgram $out/bin/wps \
-          --set GTK_IM_MODULE "fcitx" \
-          --set QT_IM_MODULE "fcitx" \
-          --set SDL_IM_MODULE "fcitx"
-      '';
-    })
-  ];
+  my.packages.wps = wps.config.env;
+  home.packages = [ config.my.packages.wps ];
 }
