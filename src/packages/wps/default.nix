@@ -1,6 +1,5 @@
 { config, nixpak, pkgs, ... }:
 let
-  home = config.home.homeDirectory;
   wps = config.my.lib.mkNixPak {
     config =
       { sloth, ... }:
@@ -19,7 +18,10 @@ let
 
         bubblewrap = {
           bind.rw = [
-            home
+            [
+              (sloth.mkdir sloth.appDataDir)
+              sloth.homeDir
+            ]
           ];
 
           bind.ro = [
@@ -27,11 +29,11 @@ let
             "/bin"
           ];
 
-          env = {
-            GTK_IM_MODULE = "fcitx";
-            QT_IM_MODULE = "fcitx";
-            SDL_IM_MODULE = "fcitx";
-          };
+          # env = {
+          #   GTK_IM_MODULE = "fcitx";
+          #   QT_IM_MODULE = "fcitx";
+          #   SDL_IM_MODULE = "fcitx";
+          # };
         };
       };
   };
