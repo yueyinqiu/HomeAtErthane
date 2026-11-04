@@ -10,7 +10,7 @@ let
         --bind / / \
         --dev /dev --proc /proc \
         --tmpfs ${home}/.local/share/opencode \
-        -- /bin/sh "$@"
+        -- ${config.my.packages.bash}/bin/bash "$@"
     '';
   };
 
@@ -35,7 +35,7 @@ let
         --ro-bind /etc /etc \
         --ro-bind /run/current-system /run/current-system \
         --ro-bind ${home}/.nix-profile ${home}/.nix-profile \
-        --ro-bind ${home}/.local/state/nix/profiles/profile ${home}/.local/state/nix/profiles/profile \
+        --ro-bind ${home}/.local/state/nix/profiles ${home}/.local/state/nix/profiles \
         --bind ${home}/.local/share/opencode ${home}/.local/share/opencode \
         --bind ${home}/.local/state/opencode ${home}/.local/state/opencode \
         --dev /dev --proc /proc \
