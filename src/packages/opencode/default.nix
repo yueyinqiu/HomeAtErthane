@@ -65,8 +65,8 @@ let
       set -e
       after=$(nix profile list)
       if [ "$before" != "$after" ]; then
-        ${pkgs.libnotify}/bin/notify-send -u critical -a opencode \
-          "nix profile changed" "check: nix profile list" || true
+        ${pkgs.libnotify}/bin/notify-send \
+          "OPENCODE WARNING" "nix profile changed during the session" || true
         if [ -t 0 ] && [ -t 2 ]; then
           printf '\n\n\n\n'
           printf '%s\n' \
