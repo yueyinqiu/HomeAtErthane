@@ -4,6 +4,14 @@
     tabs.mode = "off";
   };
 
+  programs.opencode.settings.permissions = [
+    {
+      action = "external_directory";
+      resource = "*";
+      effect = "ask";
+    }
+  ];
+
   programs.opencode.context = ''
     # Host Context
 
