@@ -25,11 +25,12 @@ let
         bubblewrap = {
           shareIpc = true;
           sockets.x11 = true;
-          # Camera = V4L2 (/dev/video*).  wemeet opens /dev/video0 (+video1) via
-          # its xcast lib; the sandbox must expose the device nodes.
+          # Camera is V4L2 (/dev/video*); firmware node numbers can drift across
+          # reboots/hardware, so bind the whole /dev instead of pinning video0/1.
+          # --unshare-user maps our uid, so the app can still only touch devices
+          # this user has permission for (video/input/etc, not root disks).
           bind.dev = [
-            "/dev/video0"
-            "/dev/video1"
+            "/dev"
           ];
 
           # Strip --unshare-pid: with --share-net (shared network namespace),
