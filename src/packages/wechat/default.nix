@@ -2,7 +2,7 @@
 let
   wechat = config.my.lib.mkNixPak {
     config =
-      { sloth, ... }:
+      { sloth, lib, ... }:
       {
         imports = [
           nixpak.nixpakModules.gui-base
@@ -19,6 +19,12 @@ let
         bubblewrap = {
           dieWithParent = true;
 
+          # 走 XWayland（对应 pre-nixpak wrapper 的 --unset WAYLAND_DISPLAY + QT_QPA_PLATFORM=xcb）
+          sockets = {
+            x11 = true;
+            wayland = lib.mkForce false;
+          };
+
           tmpfs = [ "/tmp" ];
 
           bind.rw = [
@@ -34,8 +40,10 @@ let
           ];
 
           env = {
-            GTK_IM_MODULE = "fcitx";
+            DISPLAY = sloth.env "DISPLAY";
+            QT_QPA_PLATFORM = "xcb";
             QT_IM_MODULE = "fcitx";
+            XMODIFIERS = "@im=fcitx";
           };
         };
       };
