@@ -2,7 +2,7 @@
 let
   app = config.my.lib.mkNixPak {
     config =
-      { sloth, lib, ... }:
+      { sloth, lib, pkgs, ... }:
       {
         imports = [
           nixpak.nixpakModules.gui-base
@@ -23,6 +23,21 @@ let
         bubblewrap = {
           shareIpc = true;
           sockets.x11 = true;
+
+          # Strip --unshare-pid: with --share-net (shared network namespace),
+          # the pidns PID (2, 3, ...) collides with the host's low-PID daemons'
+          # netlink sockets, so Chromium's AddressTrackerLinux can't bind
+          # NETLINK_ROUTE (EADDRINUSE) and wemeet aborts at startup.
+          package = pkgs.writeShellScriptBin "bwrap" ''
+            args=()
+            for a in "$@"; do
+              case "$a" in
+                --unshare-pid) ;;
+                *) args+=("$a") ;;
+              esac
+            done
+            exec ${pkgs.bubblewrap}/bin/bwrap "''${args[@]}"
+          '';
 
           bind.ro = [
             "/etc"
