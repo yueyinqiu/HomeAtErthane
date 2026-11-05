@@ -2,7 +2,7 @@
 let
   wechat = config.my.lib.mkNixPak {
     config =
-      { sloth, lib, ... }:
+      { sloth, ... }:
       {
         imports = [
           nixpak.nixpakModules.gui-base
@@ -35,10 +35,8 @@ let
           ];
 
           env = {
-            DISPLAY = sloth.env "DISPLAY";
             QT_QPA_PLATFORM = "xcb";
             QT_IM_MODULE = "fcitx";
-            XMODIFIERS = "@im=fcitx";
           };
         };
       };
