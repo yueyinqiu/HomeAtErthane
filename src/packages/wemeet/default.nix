@@ -15,6 +15,8 @@ let
         gpu.provider = lib.mkForce "nixos";
 
         dbus.policies = {
+          "com.tencent.wemeet" = "own";      # single-instance D-Bus name: registerService fails without "own" -> app thinks a duplicate is running and quits
+          "com.tencent.wemeet.*" = "own";
           "org.fcitx.Fcitx" = "talk";       # fcitx4 name: wemeet's bundled Qt platform plugin (libfcitxplatforminputcontextplugin.so) talks to this, not Fcitx5
           "org.fcitx.Fcitx5" = "talk";      # fcitx5 name
           "org.freedesktop.IBus" = "talk";  # wemeet also ships an IBus plugin + IBUS_USE_PORTAL=1
