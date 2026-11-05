@@ -19,7 +19,7 @@ let
         --unshare-user \
         --bind / / \
         --dev /dev --proc /proc \
-        --dev-bind /dev/kvm /dev/kvm
+        --dev-bind /dev/kvm /dev/kvm \
         "''${args[@]}" \
         -- ${config.my.packages.bash}/bin/bash "$@"
       rc=$?
@@ -60,7 +60,7 @@ let
         --ro-bind ${config.xdg.configHome}/opencode ${config.xdg.configHome}/opencode \
         --ro-bind ${config.xdg.configHome}/git ${config.xdg.configHome}/git \
         --dev /dev --proc /proc \
-        --dev-bind /dev/kvm /dev/kvm
+        --dev-bind /dev/kvm /dev/kvm \
         "''${args[@]}" \
         -- ${pkgs.opencode}/bin/opencode "$@"
       rc=$?
