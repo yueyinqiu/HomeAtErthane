@@ -14,12 +14,11 @@ let
 
         dbus.policies = {
           "com.tencent.wemeet" = "own";
-          "com.tencent.wemeet.*" = "own";
           "org.fcitx.Fcitx" = "talk";
         };
 
         bubblewrap = {
-          sockets.x11 = true;
+          shareIpc = true;
           bind.dev = [ "/dev" ];
 
           bind.ro = [
