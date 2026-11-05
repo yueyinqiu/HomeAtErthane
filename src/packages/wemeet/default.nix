@@ -24,6 +24,10 @@ let
           shareIpc = true;
           sockets.x11 = true;
 
+          bind.ro = [
+            "/etc"
+          ];
+
           bind.rw = [
             [
               (sloth.mkdir sloth.appDataDir)
