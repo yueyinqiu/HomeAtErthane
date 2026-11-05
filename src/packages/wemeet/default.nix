@@ -18,6 +18,8 @@ let
         };
 
         bubblewrap = {
+          dieWithParent = true;
+
           bind.dev = [ "/dev" ];
 
           bind.ro = [
