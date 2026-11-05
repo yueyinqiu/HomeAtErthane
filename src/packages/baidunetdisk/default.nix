@@ -2,7 +2,7 @@
 let
   app = config.my.lib.mkNixPak {
     config =
-      { sloth, ... }:
+      { sloth, pkgs, ... }:
       {
         imports = [
           nixpak.nixpakModules.gui-base
@@ -50,13 +50,16 @@ let
             ELECTRON_OZONE_PLATFORM_HINT = "x11";
             # fcitx5's GTK im-module (im-fcitx5.so) registers as "fcitx".
             GTK_IM_MODULE = "fcitx";
-            # Point GTK at the profile-generated immodules.cache (lists
-            # "fcitx" -> fcitx5-with-addons .../im-fcitx5.so).  The FHS env
-            # reads this via its /etc symlink farm; nixpak's minimal /etc
-            # doesn't, so GTK falls back to gtk3's empty in-package cache and
-            # finds no im-module.  ~/.nix-profile resolves now that
-            # /nix/var/nix/profiles is bound.
-            GTK_IM_MODULE_FILE = sloth.concat' sloth.homeDir "/home/.nix-profile/etc/gtk-3.0/immodules.cache";
+            # Give GTK a self-contained immodules.cache that maps "fcitx" ->
+            # im-fcitx5.so.  We can't rely on ~/.nix-profile/etc/gtk-3.0/… (the
+            # profile symlink chain doesn't resolve in the sandbox), so bake the
+            # entry directly, pointing at fcitx5-gtk's .so in the nix store
+            # (reachable via bindEntireStore).
+            GTK_IM_MODULE_FILE = "${pkgs.writeText "gtk-immodules.cache" ''
+              "${pkgs.fcitx5-gtk}/lib/gtk-3.0/3.0.0/immodules/im-fcitx5.so"
+              "fcitx" "Fcitx5 (Flexible Input Method Framework5)" "fcitx5" "${pkgs.fcitx5-gtk}/locale" "ja:ko:zh:*"
+              "fcitx5" "Fcitx5 (Flexible Input Method Framework5)" "fcitx5" "${pkgs.fcitx5-gtk}/locale" "ja:ko:zh:*"
+            ''}";
           };
         };
       };
