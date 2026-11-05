@@ -24,10 +24,6 @@ let
             (sloth.concat' sloth.homeDir "/.local/state/nix/profiles")
           ];
 
-          bind.dev = [
-            "/tmp/.X11-unix"
-          ];
-
           tmpfs = [
             "/tmp"
           ];
@@ -45,9 +41,6 @@ let
 
           env = {
             TMPDIR = "/tmp";
-            # ELECTRON_OZONE_PLATFORM_HINT = "x11";
-            # GTK_IM_MODULE = "fcitx";
-            # GTK_IM_MODULE_FILE = sloth.concat' sloth.homeDir "/.nix-profile/etc/gtk-3.0/immodules.cache";
           };
         };
       };
