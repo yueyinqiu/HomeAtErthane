@@ -2,7 +2,7 @@
 let
   app = config.my.lib.mkNixPak {
     config =
-      { sloth, lib, pkgs, ... }:
+      { sloth, ... }:
       {
         imports = [
           nixpak.nixpakModules.gui-base
@@ -18,7 +18,6 @@ let
         };
 
         bubblewrap = {
-          shareIpc = true;
           bind.dev = [ "/dev" ];
 
           bind.ro = [
