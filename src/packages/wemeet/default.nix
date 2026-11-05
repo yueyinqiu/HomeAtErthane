@@ -25,6 +25,10 @@ let
         bubblewrap = {
           shareIpc = true;
           sockets.x11 = true;
+          # Camera enumeration goes through PipeWire (wemeet loads
+          # libpipewire-0.3.so; no /dev/video* access).  gui-base only exposes
+          # pulse (audio), not the pipewire video socket.
+          sockets.pipewire = true;
 
           # Strip --unshare-pid: with --share-net (shared network namespace),
           # the pidns PID (2, 3, ...) collides with the host's low-PID daemons'
