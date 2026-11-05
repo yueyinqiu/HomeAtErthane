@@ -45,9 +45,9 @@ let
 
           env = {
             TMPDIR = "/tmp";
-            ELECTRON_OZONE_PLATFORM_HINT = "x11";
-            GTK_IM_MODULE = "fcitx";
-            GTK_IM_MODULE_FILE = sloth.concat' sloth.homeDir "/.nix-profile/etc/gtk-3.0/immodules.cache";
+            # ELECTRON_OZONE_PLATFORM_HINT = "x11";
+            # GTK_IM_MODULE = "fcitx";
+            # GTK_IM_MODULE_FILE = sloth.concat' sloth.homeDir "/.nix-profile/etc/gtk-3.0/immodules.cache";
           };
         };
       };
