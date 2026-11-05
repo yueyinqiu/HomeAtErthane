@@ -17,7 +17,9 @@ let
         };
 
         bubblewrap = {
-          tmpfs = [ "/tmp" ];
+          tmpfs = [
+            (sloth.envOr "TMPDIR" "/tmp")
+          ];
           
           bind.rw = [
             [
