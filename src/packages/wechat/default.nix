@@ -39,6 +39,9 @@ let
             "/sys"
           ];
 
+          # 试：把宿主 /dev/shm 透进来，看能否救回 X11 Present 的 buffer 交换
+          bind.dev = [ "/dev/shm" ];
+
           env = {
             DISPLAY = sloth.env "DISPLAY";
             QT_QPA_PLATFORM = "xcb";
