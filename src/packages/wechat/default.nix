@@ -16,13 +16,16 @@ let
           "org.fcitx.Fcitx5" = "talk";
         };
 
+        # 用宿主 GL 驱动（跟宿主 XWayland 的 DRI3 匹配），而非 gui-base 默认的 bundled mesa
+        gpu.provider = lib.mkForce "nixos";
+
         bubblewrap = {
           dieWithParent = true;
 
           # 走 XWayland（对应 pre-nixpak wrapper 的 --unset WAYLAND_DISPLAY + QT_QPA_PLATFORM=xcb）
           sockets = {
             x11 = true;
-            wayland = lib.mkForce false;
+            wayland = true;
           };
 
           tmpfs = [ "/tmp" ];
@@ -38,9 +41,6 @@ let
             "/etc"
             "/sys"
           ];
-
-          # 试：把宿主 /dev/shm 透进来，看能否救回 X11 Present 的 buffer 交换
-          bind.dev = [ "/dev/shm" ];
 
           env = {
             DISPLAY = sloth.env "DISPLAY";
