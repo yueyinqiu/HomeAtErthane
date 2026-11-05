@@ -50,6 +50,13 @@ let
             ELECTRON_OZONE_PLATFORM_HINT = "x11";
             # fcitx5's GTK im-module (im-fcitx5.so) registers as "fcitx".
             GTK_IM_MODULE = "fcitx";
+            # Point GTK at the profile-generated immodules.cache (lists
+            # "fcitx" -> fcitx5-with-addons .../im-fcitx5.so).  The FHS env
+            # reads this via its /etc symlink farm; nixpak's minimal /etc
+            # doesn't, so GTK falls back to gtk3's empty in-package cache and
+            # finds no im-module.  ~/.nix-profile resolves now that
+            # /nix/var/nix/profiles is bound.
+            GTK_IM_MODULE_FILE = sloth.concat' sloth.homeDir "/.nix-profile/etc/gtk-3.0/immodules.cache";
           };
         };
       };
