@@ -2,7 +2,7 @@
 let
   app = config.my.lib.mkNixPak {
     config =
-      { sloth, ... }:
+      { sloth, pkgs, ... }:
       {
         imports = [
           nixpak.nixpakModules.gui-base
@@ -41,6 +41,11 @@ let
             GTK_IM_MODULE = "fcitx";
             QT_IM_MODULE = "fcitx";
             ELECTRON_OZONE_PLATFORM_HINT = "x11";
+            # The host's GTK_PATH points through ~/.nix-profile -> /nix/var
+            # symlinks that dangle in the sandbox (nixpak only binds
+            # /nix/store).  Point GTK straight at fcitx5's immodules so it can
+            # dlopen im-fcitx5.so.
+            GTK_PATH = "${pkgs.fcitx5-gtk}/lib/gtk-3.0:${pkgs.fcitx5-gtk}/lib/gtk-4.0";
           };
         };
       };
