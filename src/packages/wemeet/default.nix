@@ -15,7 +15,9 @@ let
         gpu.provider = lib.mkForce "nixos";
 
         dbus.policies = {
-          "org.fcitx.Fcitx5" = "talk";
+          "org.fcitx.Fcitx" = "talk";       # fcitx4 name: wemeet's bundled Qt platform plugin (libfcitxplatforminputcontextplugin.so) talks to this, not Fcitx5
+          "org.fcitx.Fcitx5" = "talk";      # fcitx5 name
+          "org.freedesktop.IBus" = "talk";  # wemeet also ships an IBus plugin + IBUS_USE_PORTAL=1
         };
 
         bubblewrap = {
