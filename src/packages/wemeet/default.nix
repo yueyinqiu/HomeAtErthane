@@ -26,6 +26,10 @@ let
           # 映射成本用户，因此只能碰本用户有权限的设备（video/input 等）。
           bind.dev = [ "/dev" ];
 
+          bind.ro = [
+            "/etc"
+          ];
+          
           bind.rw = [
             [
               (sloth.mkdir sloth.appDataDir)
