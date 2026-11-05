@@ -17,11 +17,13 @@ let
         };
 
         bubblewrap = {
-          tmpfs = [
-            (sloth.envOr "TMPDIR" "/tmp")
-          ];
-          
+          sockets.x11 = true;
+
           bind.rw = [
+            # Writable /tmp (also exposes /tmp/.X11-unix).  Must be a bind,
+            # NOT a tmpfs: bwrap applies mounts in order, so a later
+            # `--tmpfs /tmp` would wipe the X11 socket bound by sockets.x11.
+            "/tmp"
             [
               (sloth.mkdir sloth.appDataDir)
               sloth.homeDir
@@ -33,8 +35,12 @@ let
           ];
 
           env = {
+            # Override TMPDIR leaked from `nix develop` (dev-switch); it used
+            # to point into a build dir that doesn't exist in the sandbox.
+            TMPDIR = "/tmp";
             GTK_IM_MODULE = "fcitx";
             QT_IM_MODULE = "fcitx";
+            ELECTRON_OZONE_PLATFORM_HINT = "x11";
           };
         };
       };
