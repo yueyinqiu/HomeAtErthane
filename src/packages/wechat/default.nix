@@ -31,9 +31,12 @@ let
           bind.ro = [
             "/etc"
             "/sys"
-            (sloth.concat' sloth.homeDir "/.nix-profile")
-            (sloth.concat' sloth.homeDir "/.local/state/nix/profiles")
           ];
+
+          env = {
+            GTK_IM_MODULE = "fcitx";
+            QT_IM_MODULE = "fcitx";
+          };
         };
       };
   };
