@@ -17,8 +17,6 @@ let
         };
 
         bubblewrap = {
-          sockets.x11 = true;
-
           bind.ro = [
             (sloth.concat' sloth.homeDir "/.nix-profile")
             (sloth.concat' sloth.homeDir "/.local/state/nix/profiles")
