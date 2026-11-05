@@ -19,6 +19,15 @@ let
         bubblewrap = {
           sockets.x11 = true;
 
+          # Make ~/.nix-profile (-> /nix/var/nix/profiles/...) resolvable so the
+          # host's GTK_PATH symlink farm (with fcitx5's im-fcitx5.so + the
+          # generated immodules.cache) actually resolves.  buildFHSEnv binds all
+          # of /nix; nixpak only binds /nix/store, which dangles the profile
+          # symlinks and is exactly why GTK never found the fcitx im-module.
+          bind.ro = [
+            "/nix/var/nix/profiles"
+          ];
+
           bind.rw = [
             # Writable /tmp (also exposes /tmp/.X11-unix).  Must be a bind,
             # NOT a tmpfs: bwrap applies mounts in order, so a later
@@ -39,11 +48,8 @@ let
             # to point into a build dir that doesn't exist in the sandbox.
             TMPDIR = "/tmp";
             ELECTRON_OZONE_PLATFORM_HINT = "x11";
-            # fcitx on this host talks over XIM (XMODIFIERS=@im=fcitx), not the
-            # GTK/Qt immodule.  DON'T set GTK_IM_MODULE: forcing "fcitx" makes
-            # GTK look for a module that isn't loadable here and kills the XIM
-            # fallback.
-            XMODIFIERS = "@im=fcitx";
+            # fcitx5's GTK im-module (im-fcitx5.so) registers as "fcitx".
+            GTK_IM_MODULE = "fcitx";
           };
         };
       };
