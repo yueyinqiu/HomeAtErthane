@@ -56,7 +56,7 @@ let
             # doesn't, so GTK falls back to gtk3's empty in-package cache and
             # finds no im-module.  ~/.nix-profile resolves now that
             # /nix/var/nix/profiles is bound.
-            GTK_IM_MODULE_FILE = sloth.concat' sloth.homeDir "/.nix-profile/etc/gtk-3.0/immodules.cache";
+            GTK_IM_MODULE_FILE = sloth.concat' sloth.homeDir "/home/.nix-profile/etc/gtk-3.0/immodules.cache";
           };
         };
       };
