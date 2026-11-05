@@ -23,7 +23,7 @@ let
           ];
 
           tmpfs = [
-            "/tmp"
+            (sloth.envOr "TMPDIR" "/tmp")
           ];
 
           bind.rw = [
@@ -36,10 +36,6 @@ let
               (sloth.concat' sloth.homeDir "/home")
             ]
           ];
-
-          env = {
-            TMPDIR = "/tmp";
-          };
         };
       };
   };
