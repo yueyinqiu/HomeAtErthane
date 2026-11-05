@@ -22,6 +22,10 @@ let
         bubblewrap = {
           dieWithParent = true;
 
+          # 共享宿主 IPC 命名空间：X11 的 Present/MIT-SHM 靠 SysV 共享内存把帧交给 XWayland，
+          # --unshare-ipc 会把它隔离掉导致画面不更新（软渲染裸跑不卡的根因方向）。
+          shareIpc = true;
+
           # 走 XWayland（对应 pre-nixpak wrapper 的 --unset WAYLAND_DISPLAY + QT_QPA_PLATFORM=xcb）
           sockets = {
             x11 = true;
