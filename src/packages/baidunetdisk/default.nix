@@ -2,7 +2,7 @@
 let
   app = config.my.lib.mkNixPak {
     config =
-      { sloth, pkgs, ... }:
+      { sloth, ... }:
       {
         imports = [
           nixpak.nixpakModules.gui-base
@@ -38,14 +38,12 @@ let
             # Override TMPDIR leaked from `nix develop` (dev-switch); it used
             # to point into a build dir that doesn't exist in the sandbox.
             TMPDIR = "/tmp";
-            GTK_IM_MODULE = "fcitx";
-            QT_IM_MODULE = "fcitx";
             ELECTRON_OZONE_PLATFORM_HINT = "x11";
-            # The host's GTK_PATH points through ~/.nix-profile -> /nix/var
-            # symlinks that dangle in the sandbox (nixpak only binds
-            # /nix/store).  Point GTK straight at fcitx5's immodules so it can
-            # dlopen im-fcitx5.so.
-            GTK_PATH = "${pkgs.fcitx5-gtk}/lib/gtk-3.0:${pkgs.fcitx5-gtk}/lib/gtk-4.0";
+            # fcitx on this host talks over XIM (XMODIFIERS=@im=fcitx), not the
+            # GTK/Qt immodule.  DON'T set GTK_IM_MODULE: forcing "fcitx" makes
+            # GTK look for a module that isn't loadable here and kills the XIM
+            # fallback.
+            XMODIFIERS = "@im=fcitx";
           };
         };
       };
