@@ -10,7 +10,7 @@ let
         ];
 
         app.package = pkgs.wemeet;
-        app.binPath = "bin/wemeet";  # native Wayland (not wemeet-xwayland)
+        app.binPath = "bin/wemeet-xwayland";
 
         gpu.provider = lib.mkForce "nixos";
 
