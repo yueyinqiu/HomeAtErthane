@@ -15,42 +15,16 @@ let
         gpu.provider = lib.mkForce "nixos";
 
         dbus.policies = {
-          "com.tencent.wemeet" = "own";      # single-instance D-Bus name: registerService fails without "own" -> app thinks a duplicate is running and quits
-          "com.tencent.wemeet.*" = "own";
-          "org.fcitx.Fcitx" = "talk";       # fcitx4 name: wemeet's bundled Qt platform plugin (libfcitxplatforminputcontextplugin.so) talks to this, not Fcitx5
-          "org.fcitx.Fcitx5" = "talk";      # fcitx5 name
-          "org.freedesktop.IBus" = "talk";  # wemeet also ships an IBus plugin + IBUS_USE_PORTAL=1
+          # 单实例：不 own 这个名，wemeet 会误判"已有实例"直接退出。
+          "com.tencent.wemeet" = "own";
+          # fcitx4 前端名 —— wemeet 自带的 Qt 插件只认这个，不认 Fcitx5。
+          "org.fcitx.Fcitx" = "talk";
         };
 
         bubblewrap = {
-          shareIpc = true;
-          sockets.x11 = true;
-          # Camera is V4L2 (/dev/video*); firmware node numbers can drift across
-          # reboots/hardware, so bind the whole /dev instead of pinning video0/1.
-          # --unshare-user maps our uid, so the app can still only touch devices
-          # this user has permission for (video/input/etc, not root disks).
-          bind.dev = [
-            "/dev"
-          ];
-
-          # Strip --unshare-pid: with --share-net (shared network namespace),
-          # the pidns PID (2, 3, ...) collides with the host's low-PID daemons'
-          # netlink sockets, so Chromium's AddressTrackerLinux can't bind
-          # NETLINK_ROUTE (EADDRINUSE) and wemeet aborts at startup.
-          package = pkgs.writeShellScriptBin "bwrap" ''
-            args=()
-            for a in "$@"; do
-              case "$a" in
-                --unshare-pid) ;;
-                *) args+=("$a") ;;
-              esac
-            done
-            exec ${pkgs.bubblewrap}/bin/bwrap "''${args[@]}"
-          '';
-
-          bind.ro = [
-            "/etc"
-          ];
+          # 摄像头是 V4L2，编号会漂，干脆整个 /dev。--unshare-user 把 uid
+          # 映射成本用户，因此只能碰本用户有权限的设备（video/input 等）。
+          bind.dev = [ "/dev" ];
 
           bind.rw = [
             [
@@ -60,7 +34,6 @@ let
           ];
 
           env = {
-            GTK_IM_MODULE = "fcitx";
             QT_IM_MODULE = "fcitx";
           };
         };
