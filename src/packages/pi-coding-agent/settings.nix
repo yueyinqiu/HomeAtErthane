@@ -15,7 +15,7 @@
     - When a CLI tool is missing, invoke it **on demand** rather than installing it persistently:
       - `nix shell nixpkgs#<pkg>` — enter a shell with the tool available
       - `nix run nixpkgs#<pkg>` — run the tool directly
-    - **Do not** recursively traverse or search `/` or `/nix/store` (very slow). To look up Nix package definitions, options, or modules, query online (e.g. search.nixos.org, the nixpkgs repo on GitHub) rather than grepping the local store.
+    - **Do not** recursively traverse or search `/` or `/nix/store` (very slow). To look up Nix package definitions, options, or modules, query online instead (e.g. search.nixos.org, the nixpkgs repo on GitHub) rather than grepping the local store.
 
     ## Network Environment (Restricted)
 
