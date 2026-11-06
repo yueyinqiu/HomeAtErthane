@@ -4,6 +4,10 @@
     tabs.mode = "off";
   };
 
+  programs.opencode.settings = {
+    snapshot = false;
+  };
+
   programs.opencode.settings.permissions = [
     {
       action = "external_directory";
