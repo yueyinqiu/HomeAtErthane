@@ -9,8 +9,6 @@ let
           nixpak.nixpakModules.network
         ];
 
-        flatpak.info.Context.filesystems = "host";
-
         app.package = pkgs.qq;
         app.binPath = "bin/qq";
 
