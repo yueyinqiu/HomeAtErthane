@@ -1,0 +1,14 @@
+{
+  "Command": [
+    {
+      "$type": "CommandTokenLiteral",
+      "Value": "pi"
+    },
+    {
+      "$type": "CommandTokenLiteral",
+      "Value": "--resume"
+    }
+  ],
+  "Description": "pi-coding-agent; pi; resume; session",
+  "ExtraArguments": false
+}
