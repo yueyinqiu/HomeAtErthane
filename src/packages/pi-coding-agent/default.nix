@@ -47,6 +47,7 @@ let
         --ro-bind /nix /nix
         --ro-bind /usr /usr
         --ro-bind /etc /etc
+        --ro-bind /bin /bin
 
         --ro-bind /run/current-system /run/current-system
         --ro-bind ${home}/.nix-profile ${home}/.nix-profile
