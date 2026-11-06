@@ -43,12 +43,9 @@ let
     };
     filesystem = {
       allowRead = [ ];
-      allowWrite = [
-        "."
-        "/tmp"
-      ];
+      allowWrite = [ "/" ];
       denyRead = [ "~/.pi/agent" ];
-      denyWrite = [ ];
+      denyWrite = [ "~/.pi/agent" ];
     };
   };
 in

@@ -55,6 +55,8 @@ let
         --bind ${piDirectory} ${piDirectory}
 
         --dev-bind /dev/kvm /dev/kvm
+        --ro-bind ${config.xdg.configHome}/git ${config.xdg.configHome}/git
+
         --bind ${config.my.paths.s} ${config.my.paths.s}
       )
 
