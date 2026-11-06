@@ -5,7 +5,7 @@ let
   sandboxConfig = {
     enabled = true;
     network = {
-      disable = true;
+      disabled = true;
       allowAllUnixSockets = true;
     };
     filesystem = {
