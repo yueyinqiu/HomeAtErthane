@@ -26,6 +26,10 @@ let
           bind.ro = [
             "/etc"
           ];
+
+          env = {
+            SDL_AUDIODRIVER = "pulseaudio";
+          };
         };
       };
   };
