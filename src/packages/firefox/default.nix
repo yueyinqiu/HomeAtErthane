@@ -19,6 +19,8 @@ let
         bubblewrap = {
           dieWithParent = true;
 
+          sockets.pipewire = true;
+
           bind.rw = [
             [
               (sloth.mkdir sloth.appDataDir)
