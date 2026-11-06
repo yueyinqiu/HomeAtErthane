@@ -14,7 +14,6 @@ let
 
         dbus.policies = {
           "com.tencent.wemeet" = "own";
-          "org.fcitx.Fcitx5" = "talk";
         };
 
         bubblewrap = {
