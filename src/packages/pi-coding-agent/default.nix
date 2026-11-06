@@ -1,6 +1,91 @@
-{ pkgs, ... }: {
+{ config, pkgs, ... }:
+let
+  home = config.home.homeDirectory;
+  piDirectory = "${home}/.pi/agent";
+
+  profileGuard = pkgs.writeShellApplication {
+    name = "pi-nix-profile-guard";
+    text = ''
+      hash="''${PI_SANDBOX_NIX_PROFILE_HASH:-}"
+      new_hash() {
+        nix profile list --json | sha256sum
+      }
+
+      if [ "$(new_hash)" != "$hash" ]; then
+        echo "Commands cannot be executed until the nix profile is rolled back. Please report this to the user." >&2
+        exit 1
+      fi
+
+      set +e
+      ${config.my.packages.bash}/bin/bash "$@"
+      rc=$?
+      set -e
+
+      if [ "$(new_hash)" != "$hash" ]; then
+        echo "The nix profile has been changed! Please stop any other operation and report this to the user!" >&2
+      fi
+      exit "$rc"
+    '';
+  };
+
+  sandboxed = pkgs.writeShellApplication {
+    name = "pi-sandbox";
+    text = ''
+      args=(
+        --unshare-user
+        --unshare-ipc
+        --unshare-pid
+        --unshare-uts
+        --unshare-cgroup
+
+        --dev /dev
+        --proc /proc
+        --tmpfs /tmp
+        --ro-bind /nix /nix
+        --ro-bind /usr /usr
+        --ro-bind /etc /etc
+
+        --ro-bind /run/current-system /run/current-system
+        --ro-bind ${home}/.nix-profile ${home}/.nix-profile
+        --ro-bind ${config.xdg.stateHome}/nix/profiles ${config.xdg.stateHome}/nix/profiles
+
+        --bind ${piDirectory} ${piDirectory}
+
+        --dev-bind /dev/kvm /dev/kvm
+        --bind ${config.my.paths.s} ${config.my.paths.s}
+      )
+
+      IFS=':'
+      for d in ''${PI_SANDBOX_EXTRA_DIRECTORIES:-}; do
+        if [ -n "$d" ]; then
+          args+=(--bind "$d" "$d")
+        fi
+      done
+      unset IFS
+
+      exec ${pkgs.bubblewrap}/bin/bwrap \
+        --setenv PI_SANDBOX_NIX_PROFILE_HASH "$(nix profile list --json | sha256sum)" \
+        "''${args[@]}" \
+        -- ${pkgs.pi-coding-agent}/bin/pi "$@"
+    '';
+  };
+in
+{
+  my.packages.pi-coding-agent = pkgs.symlinkJoin {
+    name = "pi-coding-agent";
+    paths = [ pkgs.pi-coding-agent ];
+    version = pkgs.pi-coding-agent.version;
+    postBuild = ''
+      rm "$out/bin/pi"
+      cp ${sandboxed}/bin/pi-sandbox "$out/bin/pi"
+      chmod +x "$out/bin/pi"
+    '';
+  };
+
   programs.pi-coding-agent = {
     enable = true;
+
+    package = config.my.packages.pi-coding-agent;
 
     extraPackages = [
       pkgs.nodejs_latest
@@ -8,113 +93,10 @@
       pkgs.bubblewrap
       pkgs.socat
       pkgs.ripgrep
+      pkgs.python314
+      pkgs.jq
     ];
 
-    context = ''
-      # Host Context
-
-      ## Host Environment (NixOS)
-
-      - The host runs **NixOS**, with the system environment managed declaratively by Nix / Home Manager.
-      - **Do not** mutate the system environment dynamically: avoid commands that change system state, such as `nix profile install`, `nixos-rebuild`, or editing `/etc`.
-      - When a CLI tool is missing, invoke it **on demand** rather than installing it persistently:
-        - `nix shell nixpkgs#<pkg>` — enter a shell with the tool available
-        - `nix run nixpkgs#<pkg>` — run the tool directly
-      - **Do not** recursively traverse or search `/` or `/nix/store` (very slow). To look up Nix package definitions, options, or modules, query online instead (e.g. search.nixos.org, the nixpkgs repo on GitHub) rather than grepping the local store.
-
-      ## Network Environment (Restricted)
-
-      - This device's network is restricted. If you encounter network issues — i.e., a website you are certain should be reachable is actually inaccessible — please contact the user to adjust the network configuration.
-
-      ## Git Conventions
-
-      - **Do not** touch the git repository of the user's project. The user uses git to track your own changes, so you must not run any git operations (commit/push/pull, etc.) against the project's repo.
-    '';
-
-    settings = {
-      defaultProvider = "35-220-164-252-3888";
-      defaultModel = "deepseek-v4-pro";
-      defaultThinkingLevel = "low";
-      packages = [
-        # "npm:@xzzpig/pi-sandbox"
-      ];
-    };
-
-    models = {
-      providers = {
-        "tongji" = {
-          baseUrl = "https://agi.tongji.edu.cn/v1";
-          api = "openai-completions";
-          compat = {
-            supportsDeveloperRole = false;
-          };
-          models = [
-            {
-              id = "DeepSeek-V4.1-Flash";
-              name = "DeepSeek-V4.1-Flash";
-              contextWindow = 900000;
-              maxTokens = 384000;
-              reasoning = true;
-              input = [
-                "text"
-                "image"
-              ];
-            }
-          ];
-        };
-        "tensoris" = {
-          baseUrl = "https://api.tensoris.ai/v1";
-          api = "openai-completions";
-          compat = {
-            supportsDeveloperRole = false;
-          };
-          models = [
-            {
-              id = "deepseek-v4-pro-0813";
-              name = "deepseek-v4-pro-0813";
-              contextWindow = 900000;
-              maxTokens = 384000;
-              reasoning = true;
-              input = [ "text" ];
-            }
-            {
-              id = "deepseek-v4.1-flash";
-              name = "deepseek-v4.1-flash";
-              contextWindow = 900000;
-              maxTokens = 384000;
-              reasoning = true;
-              input = [
-                "text"
-                "image"
-              ];
-            }
-            {
-              id = "gpt-6-luna";
-              name = "gpt-6-luna";
-              contextWindow = 900000;
-              maxTokens = 384000;
-              reasoning = true;
-              input = [
-                "text"
-                "image"
-              ];
-            }
-          ];
-        };
-      };
-    };
+    settings.shellPath = "${profileGuard}/bin/pi-nix-profile-guard";
   };
-
-  home.file.".pi/agent/sandbox.json".text = ''
-    {
-      "filesystem": {
-        "allowRead": [
-          ".",
-          "~/.config",
-          "~/.local",
-          "~/.nix-profile"
-        ]
-      }
-    }
-  '';
 }
