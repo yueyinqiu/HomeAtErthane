@@ -21,6 +21,8 @@ let
 
           sockets.pipewire = true;
 
+          bind.dev = [ "/dev" ];
+
           bind.rw = [
             [
               (sloth.mkdir sloth.appDataDir)

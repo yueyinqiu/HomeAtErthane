@@ -1,4 +1,4 @@
-{ config, nixpak, mindustry-bin, ... }:
+{ config, nixpak, pkgs, mindustry-bin, ... }:
 let
   app = config.my.lib.mkNixPak {
     config =
@@ -15,6 +15,8 @@ let
         bubblewrap = {
           dieWithParent = true;
 
+          sockets.pipewire = true;
+
           bind.rw = [
             [
               (sloth.mkdir sloth.appDataDir)
@@ -28,7 +30,7 @@ let
           ];
 
           env = {
-            SDL_AUDIODRIVER = "pulseaudio";
+            ALSA_CONFIG_PATH = "${pkgs.alsa-lib}/share/alsa/alsa.conf";
           };
         };
       };
