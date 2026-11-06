@@ -1,4 +1,4 @@
-{ lib, config, ... }: {
+{ lib, ... }: {
   options.my = {
     packages = lib.mkOption {
       type = lib.types.attrsOf lib.types.package;
@@ -10,15 +10,16 @@
       default = { };
     };
 
-    s = lib.mkOption {
-      type = lib.types.path;
+    paths = lib.mkOption {
+      type = lib.types.attrsOf lib.types.str;
+      default = { };
     };
   };
 
   config = {
     home.username = "yueyinqiu";
     home.homeDirectory = "/home/yueyinqiu";
-    my.s = "/home/yueyinqiu/s";
+    paths.s = "/home/yueyinqiu/s";
 
     nixpkgs.config.allowUnfree = true;
 
