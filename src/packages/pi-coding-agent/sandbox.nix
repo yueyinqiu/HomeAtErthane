@@ -5,41 +5,8 @@ let
   sandboxConfig = {
     enabled = true;
     network = {
+      disable = true;
       allowAllUnixSockets = true;
-      allowedDomains = [
-        "*.nixos.org"
-        "*.cachix.org"
-
-        "github.com"
-        "*.github.com"
-        "*.githubusercontent.com"
-        "gitlab.com"
-
-        "*.npmjs.org"
-        "registry.yarnpkg.com"
-        "nodejs.org"
-
-        "pypi.org"
-        "*.pypi.org"
-        "*.pythonhosted.org"
-
-        "crates.io"
-        "*.crates.io"
-        "*.rust-lang.org"
-        "docs.rs"
-
-        "*.golang.org"
-
-        "*.maven.org"
-        "*.gradle.org"
-        "*.nuget.org"
-
-        "huggingface.co"
-        "*.huggingface.co"
-
-        "*.docker.io"
-        "production.cloudflare.docker.com"
-      ];
     };
     filesystem = {
       allowRead = [ ];
