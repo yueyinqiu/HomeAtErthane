@@ -14,12 +14,11 @@ let
 
         dbus.policies = {
           "org.fcitx.Fcitx5" = "talk";
+          "org.mozilla.firefox.*" = "own";
         };
 
         bubblewrap = {
           dieWithParent = true;
-
-          sockets.pipewire = true;
 
           bind.dev = [ "/dev" ];
 

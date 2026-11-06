@@ -1,4 +1,4 @@
-{ config, nixpak, pkgs, mindustry-bin, ... }:
+{ config, nixpak, mindustry-bin, ... }:
 let
   app = config.my.lib.mkNixPak {
     config =
@@ -28,10 +28,6 @@ let
           bind.ro = [
             "/etc"
           ];
-
-          env = {
-            ALSA_CONFIG_PATH = "${pkgs.alsa-lib}/share/alsa/alsa.conf";
-          };
         };
       };
   };
