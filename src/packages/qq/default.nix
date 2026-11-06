@@ -9,7 +9,7 @@ let
           nixpak.nixpakModules.network
         ];
 
-        flatpak.info.Context.filesystems = config.my.paths.s;
+        flatpak.info.Context.filesystems = "home";
 
         app.package = pkgs.qq;
         app.binPath = "bin/qq";
