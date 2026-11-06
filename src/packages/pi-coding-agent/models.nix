@@ -1,5 +1,11 @@
 { ... }:
 {
+  programs.pi-coding-agent.settings = {
+    defaultProvider = "tensoris";
+    defaultModel = "deepseek-v4-pro-0813";
+    defaultThinkingLevel = "low";
+  };
+
   programs.pi-coding-agent.models = {
     providers = {
       "tongji" = {

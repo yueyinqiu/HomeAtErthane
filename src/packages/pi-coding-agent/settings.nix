@@ -1,16 +1,9 @@
-{ ... }:
+{ pkgs, ... }:
 {
-  programs.pi-coding-agent.settings = {
-    defaultProvider = "tensoris";
-    defaultModel = "deepseek-v4-pro-0813";
-    defaultThinkingLevel = "low";
-    packages = [
-      # Prompts for reads/writes outside the allow lists, the equivalent of
-      # opencode's `external_directory: ask` permission.
-      "npm:@xzzpig/pi-sandbox"
-      # "npm:pi-better-sandbox"
-    ];
-  };
+  programs.pi-coding-agent.extraPackages = [
+    pkgs.python314
+    pkgs.jq
+  ];
 
   programs.pi-coding-agent.context = ''
     # Host Context

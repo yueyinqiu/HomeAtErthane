@@ -64,6 +64,7 @@ let
       unset IFS
 
       exec ${pkgs.bubblewrap}/bin/bwrap \
+        --setenv PI_CLIPBOARD_OSC52 1 \
         --setenv PI_SANDBOX_NIX_PROFILE_HASH "$(nix profile list --json | sha256sum)" \
         "''${args[@]}" \
         -- ${pkgs.pi-coding-agent}/bin/pi "$@"
@@ -84,19 +85,7 @@ in
 
   programs.pi-coding-agent = {
     enable = true;
-
     package = config.my.packages.pi-coding-agent;
-
-    extraPackages = [
-      pkgs.nodejs_latest
-      pkgs.wl-clipboard
-      pkgs.bubblewrap
-      pkgs.socat
-      pkgs.ripgrep
-      pkgs.python314
-      pkgs.jq
-    ];
-
     settings.shellPath = "${profileGuard}/bin/pi-nix-profile-guard";
   };
 }
