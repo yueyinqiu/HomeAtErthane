@@ -43,7 +43,18 @@ let
     };
     filesystem = {
       allowRead = [ ];
+      # The whole launcher view writable. That view is already narrow: only
+      # ~/s, ~/.pi/agent, /tmp and an ephemeral root tmpfs exist inside it, and
+      # the read-only mounts (/nix, /etc, /usr, the nix profiles) survive
+      # because bwrap binds non-recursively.
       allowWrite = [ "/" ];
+      # The two deny lists protect different things and neither covers both:
+      #   denyRead  -> bash, as an empty tmpfs (the tools ignore it unless a
+      #                named sandbox profile is selected)
+      #   denyWrite -> read/write/edit tools, in process. For bash it is dropped
+      #                by an upstream bug: with allowWrite "/" the containment
+      #                check compares against "//" and skips the mask. The
+      #                tmpfs above is what actually stops bash.
       denyRead = [ "~/.pi/agent" ];
       denyWrite = [ "~/.pi/agent" ];
     };
