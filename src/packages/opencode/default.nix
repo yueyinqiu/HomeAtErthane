@@ -37,9 +37,11 @@ let
     name = "opencode-sandbox";
     text = ''
       before=$(nix profile list)
-      args=()
+      args=(
+        --bind ${config.my.paths.s} ${config.my.paths.s}
+      )
       IFS=':'
-      for d in ''${OPENCODE_SANDBOX_DIRECTORIES:-$PWD}; do
+      for d in ''${OPENCODE_SANDBOX_DIRECTORIES:-}; do
         if [ -n "$d" ]; then
           args+=(--bind "$d" "$d")
         fi
