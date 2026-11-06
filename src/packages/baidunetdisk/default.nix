@@ -33,10 +33,7 @@ let
               (sloth.mkdir sloth.appDataDir)
               sloth.homeDir
             ]
-            [
-              sloth.homeDir
-              (sloth.concat' sloth.homeDir "/home")
-            ]
+            config.my.paths.s
           ];
         };
       };

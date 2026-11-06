@@ -27,6 +27,7 @@ let
               (sloth.mkdir sloth.appDataDir)
               sloth.homeDir
             ]
+            config.my.paths.s
           ];
 
           bind.ro = [

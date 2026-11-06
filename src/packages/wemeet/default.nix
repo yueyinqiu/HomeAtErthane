@@ -31,6 +31,7 @@ let
               (sloth.mkdir sloth.appDataDir)
               sloth.homeDir
             ]
+            config.my.paths.s
           ];
 
           env = {
