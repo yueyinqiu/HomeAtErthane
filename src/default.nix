@@ -19,7 +19,7 @@
   config = {
     home.username = "yueyinqiu";
     home.homeDirectory = "/home/yueyinqiu";
-    paths.s = "/home/yueyinqiu/s";
+    my.paths.s = "/home/yueyinqiu/s";
 
     nixpkgs.config.allowUnfree = true;
 

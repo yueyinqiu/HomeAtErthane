@@ -9,9 +9,7 @@ let
           nixpak.nixpakModules.network
         ];
 
-        # 试：往 /.flatpak-info 的 [Context] 里声明 filesystems=host，
-        # 看 xdg-desktop-portal 会不会因此认为 app 有直读权限、返回真实路径而不走 document portal。
-        flatpak.info.Context.filesystems = "host";
+        flatpak.info.Context.filesystems = config.my.paths.s;
 
         app.package = pkgs.qq;
         app.binPath = "bin/qq";
@@ -28,6 +26,7 @@ let
               (sloth.mkdir sloth.appDataDir)
               sloth.homeDir
             ]
+            config.my.paths.s
           ];
 
           bind.ro = [
