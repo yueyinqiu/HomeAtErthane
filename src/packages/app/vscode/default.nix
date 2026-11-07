@@ -1,4 +1,10 @@
-{ config, pkgs, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
   my.packages.vscode = config.programs.vscode.package;
 
   programs.vscode.enable = true;
@@ -8,7 +14,17 @@
     (pkgs.writeShellApplication {
       name = "c";
       text = ''
-        exec ${config.my.packages.niri}/bin/niri msg action spawn -- ${config.my.packages.vscode}/bin/code "$PWD"
+        ${
+          lib.escapeShellArgs [
+            "exec"
+            "${config.my.packages.niri}/bin/niri"
+            "msg"
+            "action"
+            "spawn"
+            "--"
+            "${config.my.packages.vscode}/bin/code"
+          ]
+        } "$PWD"
       '';
     })
   ];

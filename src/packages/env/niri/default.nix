@@ -2,6 +2,7 @@
   pkgs,
   niri,
   config,
+  lib,
   ...
 }:
 {
@@ -21,9 +22,10 @@
   home.packages = [
     (pkgs.writeShellApplication {
       name = "n";
-      text = ''
-        exec ${config.my.packages.niri}/bin/niri-session
-      '';
+      text = lib.escapeShellArgs [
+        "exec"
+        "${config.my.packages.niri}/bin/niri-session"
+      ];
     })
   ];
 }

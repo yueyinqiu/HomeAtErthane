@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   my.packages.ghostty = config.programs.ghostty.package;
 
@@ -11,7 +16,17 @@
     (pkgs.writeShellApplication {
       name = "g";
       text = ''
-        exec ${config.my.packages.niri}/bin/niri msg action spawn -- ${config.my.packages.ghostty}/bin/ghostty --working-directory="$PWD"
+        ${
+          lib.escapeShellArgs [
+            "exec"
+            "${config.my.packages.niri}/bin/niri"
+            "msg"
+            "action"
+            "spawn"
+            "--"
+            "${config.my.packages.ghostty}/bin/ghostty"
+          ]
+        } --working-directory="$PWD"
       '';
     })
   ];
