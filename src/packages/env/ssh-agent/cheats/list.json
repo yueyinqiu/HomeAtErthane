@@ -1,0 +1,14 @@
+{
+  "Command": [
+    {
+      "$type": "CommandTokenLiteral",
+      "Value": "ssh-add"
+    },
+    {
+      "$type": "CommandTokenLiteral",
+      "Value": "-l"
+    }
+  ],
+  "Description": "ssh; ssh-add; list; key",
+  "ExtraArguments": false
+}
