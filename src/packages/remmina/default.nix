@@ -14,7 +14,6 @@ let
 
         dbus.policies = {
           "org.remmina.Remmina" = "own";
-          "org.remmina.Remmina.*" = "own";
         };
 
         bubblewrap = {
