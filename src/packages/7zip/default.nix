@@ -1,5 +1,7 @@
-{ pkgs, ... }: {
+{ pkgs, config, ... }: {
+  my.packages."7zip" = pkgs._7zip-zstd;
+
   home.packages = [
-    pkgs._7zip-zstd
+    config.my.packages."7zip"
   ];
 }
