@@ -1,4 +1,9 @@
-{ config, nixpak, pkgs, ... }:
+{
+  config,
+  nixpak,
+  pkgs,
+  ...
+}:
 let
   mpv = config.my.lib.mkNixPak {
     config =
@@ -11,6 +16,10 @@ let
 
         app.package = pkgs.mpv;
         app.binPath = "bin/mpv";
+        app.extraEntrypoints = [
+          "/bin/umpv"
+          "/bin/mpv_identify.sh"
+        ];
 
         bubblewrap = {
           dieWithParent = true;

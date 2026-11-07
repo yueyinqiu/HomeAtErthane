@@ -1,4 +1,9 @@
-{ config, nixpak, pkgs, ... }:
+{
+  config,
+  nixpak,
+  pkgs,
+  ...
+}:
 let
   wps = config.my.lib.mkNixPak {
     config =
@@ -11,6 +16,11 @@ let
 
         app.package = pkgs.wpsoffice-cn;
         app.binPath = "bin/wps";
+        app.extraEntrypoints = [
+          "/bin/wpp"
+          "/bin/et"
+          "/bin/wpspdf"
+        ];
 
         bubblewrap = {
           dieWithParent = true;

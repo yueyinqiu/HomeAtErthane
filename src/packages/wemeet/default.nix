@@ -1,4 +1,9 @@
-{ config, nixpak, pkgs, ... }:
+{
+  config,
+  nixpak,
+  pkgs,
+  ...
+}:
 let
   app = config.my.lib.mkNixPak {
     config =
@@ -11,6 +16,9 @@ let
 
         app.package = pkgs.wemeet;
         app.binPath = "bin/wemeet-xwayland";
+        app.extraEntrypoints = [
+          "/bin/wemeet"
+        ];
 
         dbus.policies = {
           "com.tencent.wemeet" = "own";

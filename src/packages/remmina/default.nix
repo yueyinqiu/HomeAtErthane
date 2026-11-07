@@ -1,4 +1,9 @@
-{ config, pkgs, nixpak, ... }:
+{
+  config,
+  pkgs,
+  nixpak,
+  ...
+}:
 let
   remmina = config.my.lib.mkNixPak {
     config =
@@ -11,6 +16,9 @@ let
 
         app.package = pkgs.remmina;
         app.binPath = "bin/remmina";
+        app.extraEntrypoints = [
+          "/bin/remmina-file-wrapper"
+        ];
 
         dbus.policies = {
           "org.remmina.Remmina" = "own";
