@@ -16,6 +16,7 @@ let
         # 而不是 gui-base 默认 bundle 的纯 64 位 pkgs.mesa。
         gpu.provider = lib.mkForce "nixos";
 
+        shareIpc = true;
         dbus.policies = {
           "com.steampowered.*" = "own";
         };
