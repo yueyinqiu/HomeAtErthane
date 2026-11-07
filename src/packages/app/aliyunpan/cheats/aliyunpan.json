@@ -1,0 +1,10 @@
+{
+  "Command": [
+    {
+      "$type": "CommandTokenLiteral",
+      "Value": "aliyunpan"
+    }
+  ],
+  "Description": "aliyunpan",
+  "ExtraArguments": false
+}
