@@ -54,7 +54,12 @@
   };
 
   xdg.configFile."niri/spawn-at-startup.sh" = {
-    source = ./spawn-at-startup.sh;
+    text = ''
+      #!/usr/bin/env bash
+
+      ${config.my.packages.niri}/bin/niri msg action spawn -- ${config.my.packages.qq}/bin/qq
+      ${config.my.packages.niri}/bin/niri msg action spawn -- ${config.my.packages.wechat}/bin/wechat
+    '';
     executable = true;
   };
 }

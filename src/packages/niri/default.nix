@@ -10,6 +10,9 @@
     package = niri.niri-unstable;
     enableDefaultConfig = false;
   };
+
+  my.packages.niri = config.wayland.windowManager.niri.package;
+
   xdg.portal.config.niri = {
     default = [ "gnome" ];
     "org.freedesktop.impl.portal.FileChooser" = "termfilechooser";
@@ -19,7 +22,7 @@
     (pkgs.writeShellApplication {
       name = "n";
       text = ''
-        exec ${config.wayland.windowManager.niri.package}/bin/niri-session
+        exec ${config.my.packages.niri}/bin/niri-session
       '';
     })
   ];

@@ -48,7 +48,7 @@ in
     (pkgs.writeShellApplication {
       name = "f";
       text = ''
-        exec niri msg action spawn -- firefox
+        exec ${config.my.packages.niri}/bin/niri msg action spawn -- ${config.my.packages.firefox}/bin/firefox
       '';
     })
   ];
