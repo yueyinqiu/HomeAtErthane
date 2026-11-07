@@ -1,5 +1,7 @@
 { config, pkgs, ... }:
 {
+  my.packages.easytier = pkgs.easytier;
+
   home-manager-mihomo-manager.instances.to-tongji = {
     port = 11410;
     configuration = ./config;
@@ -16,7 +18,7 @@
     };
     Service = {
       EnvironmentFile = "${config.xdg.configHome}/home-manager-mihomo-manager/to-tongji/easytier-tongji-proxy.env";
-      ExecStart = "${pkgs.easytier}/bin/easytier-core -c ${./easytier-tongji-proxy.toml}";
+      ExecStart = "${config.my.packages.easytier}/bin/easytier-core -c ${./easytier-tongji-proxy.toml}";
       Restart = "on-failure";
     };
   };

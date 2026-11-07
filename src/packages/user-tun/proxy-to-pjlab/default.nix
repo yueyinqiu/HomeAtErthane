@@ -9,8 +9,8 @@
     (pkgs.writeShellApplication {
       name = "my-proxy-to-pjlab-atrust-up";
       text = ''
-        ${pkgs.podman-compose}/bin/podman-compose -f ${config.xdg.configHome}/pjlab-atrust/compose.yml up -d
-        echo "VNC: '${pkgs.remmina}/bin/remmina' -c vnc://127.0.0.1:52495"
+        ${config.my.packages.podman-compose}/bin/podman-compose -f ${config.xdg.configHome}/pjlab-atrust/compose.yml up -d
+        echo "VNC: '${config.my.packages.remmina}/bin/remmina' -c vnc://127.0.0.1:52495"
         echo "Password: 1"
       '';
     })

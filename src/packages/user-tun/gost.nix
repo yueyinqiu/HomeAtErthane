@@ -36,13 +36,15 @@ let
   };
 in
 {
+  my.packages.gost = pkgs.gost;
+
   # 用户级桥：听用户自己的 unix socket，解析 socks5，喂回 mihomo 重入点
   systemd.user.services.user-tun-gost = {
     Unit = {
       Description = "user-tun gost bridge (unix socket -> mihomo socks-in)";
     };
     Service = {
-      ExecStart = "${pkgs.gost}/bin/gost -C ${gostConfig}";
+      ExecStart = "${config.my.packages.gost}/bin/gost -C ${gostConfig}";
       Restart = "on-failure";
       RestartSec = 3;
       UMask = "0000";   # socket 世界可写（0777），靠上层目录 0770 兜底

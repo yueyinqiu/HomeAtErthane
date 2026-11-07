@@ -5,7 +5,7 @@ let
   shell = pkgs.writeShellApplication {
     name = "opencode-sandbox-shell";
     text = ''
-      before=$(nix profile list)
+      before=$(${config.my.packages.nix}/bin/nix profile list)
       args=()
       if [ -z "''${OPENCODE_SANDBOX_ALLOW_OPENCODE_CONFIG:-}" ]; then
         args+=(
@@ -24,7 +24,7 @@ let
         -- ${config.my.packages.bash}/bin/bash "$@"
       rc=$?
       set -e
-      after=$(nix profile list)
+      after=$(${config.my.packages.nix}/bin/nix profile list)
       if [ "$before" != "$after" ]; then
         echo "!! nix profile changed — killing opencode"
         kill -9 "$PPID"
@@ -36,7 +36,7 @@ let
   sandboxed = pkgs.writeShellApplication {
     name = "opencode-sandbox";
     text = ''
-      before=$(nix profile list)
+      before=$(${config.my.packages.nix}/bin/nix profile list)
       args=(
         --bind ${config.my.paths.s} ${config.my.paths.s}
       )
@@ -67,7 +67,7 @@ let
         -- ${pkgs.opencode}/bin/opencode "$@"
       rc=$?
       set -e
-      after=$(nix profile list)
+      after=$(${config.my.packages.nix}/bin/nix profile list)
       if [ "$before" != "$after" ]; then
         ${pkgs.libnotify}/bin/notify-send \
           "OPENCODE WARNING" "nix profile changed during the session" || true
