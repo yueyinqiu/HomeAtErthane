@@ -1,0 +1,22 @@
+{
+  "Command": [
+    {
+      "$type": "CommandTokenLiteral",
+      "Value": "7z"
+    },
+    {
+      "$type": "CommandTokenLiteral",
+      "Value": "x"
+    },
+    {
+      "$type": "CommandTokenVariable",
+      "Name": "archive",
+      "Suggester": {
+        "$type": "ArgumentSuggesterCsharp",
+        "ScriptPath": "list-archives.cs"
+      }
+    }
+  ],
+  "Description": "7z; 7zip; extract; unzip",
+  "ExtraArguments": false
+}

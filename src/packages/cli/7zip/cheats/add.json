@@ -1,0 +1,30 @@
+{
+  "Command": [
+    {
+      "$type": "CommandTokenLiteral",
+      "Value": "7z"
+    },
+    {
+      "$type": "CommandTokenLiteral",
+      "Value": "a"
+    },
+    {
+      "$type": "CommandTokenVariable",
+      "Name": "archive",
+      "Suggester": {
+        "$type": "ArgumentSuggesterCsharp",
+        "ScriptPath": "list-archives.cs"
+      }
+    },
+    {
+      "$type": "CommandTokenVariable",
+      "Name": "files",
+      "Suggester": {
+        "$type": "ArgumentSuggesterCsharp",
+        "ScriptPath": "list-files.cs"
+      }
+    }
+  ],
+  "Description": "7z; 7zip; compress; add; archive",
+  "ExtraArguments": true
+}
