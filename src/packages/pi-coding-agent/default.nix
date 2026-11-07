@@ -3,37 +3,6 @@ let
   home = config.home.homeDirectory;
   piDirectory = "${home}/.pi/agent";
 
-  nixProfileSha256sum = pkgs.writeShellApplication {
-    name = "nix-profile-sha256sum";
-    text = ''
-      {
-        ${pkgs.coreutils}/bin/readlink "${home}/.nix-profile"
-        ${pkgs.coreutils}/bin/readlink -f "${home}/.nix-profile"
-      } | ${pkgs.coreutils}/bin/sha256sum
-    '';
-  };
-
-  piNixProfileGuardRun = pkgs.writeShellApplication {
-    name = "pi-nix-profile-guard-run";
-    text = ''
-      hash="''${PI_SANDBOX_NIX_PROFILE_HASH:-}"
-      if [ "$(${nixProfileSha256sum}/bin/nix-profile-sha256sum)" != "$hash" ]; then
-        echo "Commands cannot be executed until the nix profile is rolled back. Please report this to the user." >&2
-        exit 1
-      fi
-
-      set +e
-      ${config.my.packages.bash}/bin/bash "$@"
-      rc=$?
-      set -e
-
-      if [ "$(${nixProfileSha256sum}/bin/nix-profile-sha256sum)" != "$hash" ]; then
-        echo "The nix profile has been changed! Please stop any other operation and report this to the user!" >&2
-      fi
-      exit "$rc"
-    '';
-  };
-
   sandboxed = pkgs.writeShellApplication {
     name = "pi-sandbox";
     text = ''
@@ -74,7 +43,6 @@ let
 
       exec ${pkgs.bubblewrap}/bin/bwrap \
         --setenv PI_CLIPBOARD_OSC52 1 \
-        --setenv PI_SANDBOX_NIX_PROFILE_HASH "$(${nixProfileSha256sum}/bin/nix-profile-sha256sum)" \
         "''${args[@]}" \
         -- ${pkgs.pi-coding-agent}/bin/pi "$@"
     '';
@@ -95,6 +63,5 @@ in
   programs.pi-coding-agent = {
     enable = true;
     package = config.my.packages.pi-coding-agent;
-    settings.shellPath = "${piNixProfileGuardRun}/bin/pi-nix-profile-guard-run";
   };
 }
