@@ -35,6 +35,7 @@ let
 
           env = {
             QT_IM_MODULE = "fcitx";
+            EGL_PLATFORM = "x11";
           };
         };
       };
