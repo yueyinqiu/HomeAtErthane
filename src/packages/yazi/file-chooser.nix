@@ -5,10 +5,10 @@
   ...
 }:
 let
-  ghostty = "${config.programs.ghostty.package}/bin/ghostty";
-  termfilechooser = pkgs.xdg-desktop-portal-termfilechooser;
+  ghostty = "${config.my.packages.ghostty}/bin/ghostty";
+  termfilechooser = config.my.packages.termfilechooser;
 
-  yazi-escaped = lib.escapeShellArg "${config.programs.yazi.package}/bin/yazi";
+  yazi-escaped = lib.escapeShellArg "${config.my.packages.yazi}/bin/yazi";
   yazi-wrapper = pkgs.runCommand "yazi-wrapper.sh" { } ''
     substitute ${lib.escapeShellArg "${termfilechooser}/share/xdg-desktop-portal-termfilechooser/yazi-wrapper.sh"} \
       $out \
@@ -17,8 +17,10 @@ let
   '';
 in
 {
+  my.packages.termfilechooser = pkgs.xdg-desktop-portal-termfilechooser;
+
   xdg.portal.extraPortals = [
-    termfilechooser
+    config.my.packages.termfilechooser
   ];
   xdg.configFile."xdg-desktop-portal-termfilechooser/config".text = ''
     [filechooser]
