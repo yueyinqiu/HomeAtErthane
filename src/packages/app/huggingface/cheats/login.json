@@ -1,0 +1,18 @@
+{
+  "Command": [
+    {
+      "$type": "CommandTokenLiteral",
+      "Value": "hf"
+    },
+    {
+      "$type": "CommandTokenLiteral",
+      "Value": "auth"
+    },
+    {
+      "$type": "CommandTokenLiteral",
+      "Value": "login"
+    }
+  ],
+  "Description": "huggingface; hf; login",
+  "ExtraArguments": false
+}
