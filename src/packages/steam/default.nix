@@ -19,6 +19,10 @@ let
         bubblewrap = {
           dieWithParent = true;
 
+          tmpfs = [
+            "/tmp"
+          ];
+
           bind.dev = [ "/dev" ];
 
           bind.rw = [
