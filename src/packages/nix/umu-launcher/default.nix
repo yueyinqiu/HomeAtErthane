@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, config, lib, ... }:
 let
   games = "${config.xdg.dataHome}/umu-games";
 
@@ -11,9 +11,9 @@ let
         --run '
           if [ -z "''${WINEPREFIX:-}" ]; then
             if [ -n "''${STORE:-}" ]; then
-              export WINEPREFIX="${games}/$STORE"
+              export WINEPREFIX=${lib.escapeShellArg games}/"$STORE"
             else
-              export WINEPREFIX="${games}/umu/''${GAMEID:-umu-default}"
+              export WINEPREFIX=${lib.escapeShellArg games}/umu/"''${GAMEID:-umu-default}"
             fi
           fi
         '

@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   my.packages.easytier = pkgs.easytier;
 
@@ -18,7 +23,11 @@
     };
     Service = {
       EnvironmentFile = "${config.xdg.configHome}/home-manager-mihomo-manager/to-tongji/easytier-tongji-proxy.env";
-      ExecStart = "${config.my.packages.easytier}/bin/easytier-core -c ${./easytier-tongji-proxy.toml}";
+      ExecStart = lib.hm.strings.escapeSystemdExecArgs [
+        "${config.my.packages.easytier}/bin/easytier-core"
+        "-c"
+        ./easytier-tongji-proxy.toml
+      ];
       Restart = "on-failure";
     };
   };
