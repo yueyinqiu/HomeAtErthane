@@ -6,7 +6,10 @@ let
   nixProfileSha256sum = pkgs.writeShellApplication {
     name = "nix-profile-sha256sum";
     text = ''
-      ${pkgs.nix}/bin/nix profile list --json | ${pkgs.coreutils}/bin/sha256sum
+      {
+        ${pkgs.coreutils}/bin/readlink "${home}/.nix-profile"
+        ${pkgs.coreutils}/bin/readlink -f "${home}/.nix-profile"
+      } | ${pkgs.coreutils}/bin/sha256sum
     '';
   };
 
@@ -50,7 +53,7 @@ let
         --ro-bind /bin /bin
 
         --ro-bind /run/current-system /run/current-system
-        --ro-bind ${home}/.nix-profile ${home}/.nix-profile
+        --symlink ${config.xdg.stateHome}/nix/profiles/profile ${home}/.nix-profile
         --ro-bind ${config.xdg.stateHome}/nix/profiles ${config.xdg.stateHome}/nix/profiles
 
         --bind ${piDirectory} ${piDirectory}
