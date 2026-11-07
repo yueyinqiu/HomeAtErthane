@@ -1,0 +1,18 @@
+{
+  "Command": [
+    {
+      "$type": "CommandTokenLiteral",
+      "Value": "nvim"
+    },
+    {
+      "$type": "CommandTokenVariable",
+      "Name": "file",
+      "Suggester": {
+        "$type": "ArgumentSuggesterCsharp",
+        "ScriptPath": "list-files.cs"
+      }
+    }
+  ],
+  "Description": "nvim; neovim; edit",
+  "ExtraArguments": false
+}
