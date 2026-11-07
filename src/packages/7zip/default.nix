@@ -6,6 +6,11 @@ let
       {
         app.package = pkgs._7zip-zstd;
         app.binPath = "bin/7z";
+        app.extraEntrypoints = [
+          "/bin/7za"
+          "/bin/7zr"
+          "/bin/7zz"
+        ];
 
         dbus.enable = false;
 
