@@ -1,5 +1,7 @@
-{ pkgs, ... }: {
-  home.packages = with pkgs; [
-    nb
+{ pkgs, config, ... }: {
+  my.packages.nb = pkgs.nb;
+
+  home.packages = [
+    config.my.packages.nb
   ];
 }

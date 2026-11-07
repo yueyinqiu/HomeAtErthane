@@ -1,9 +1,12 @@
 {
   nix-airgap,
+  config,
   ...
 }:
 {
+  my.packages.nix-airgap = nix-airgap.airgap;
+
   home.packages = [
-    nix-airgap.airgap
+    config.my.packages.nix-airgap
   ];
 }

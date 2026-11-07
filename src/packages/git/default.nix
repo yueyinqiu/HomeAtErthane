@@ -1,4 +1,6 @@
-{ ... }: {
+{ config, ... }: {
+  my.packages.git = config.programs.git.package;
+
   programs.git = {
     enable = true;
     settings = {

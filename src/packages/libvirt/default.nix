@@ -6,9 +6,12 @@
   ...
 }:
 {
-  home.packages = with pkgs; [
-    libvirt
-    virt-viewer
+  my.packages.libvirt = pkgs.libvirt;
+  my.packages.virt-viewer = pkgs.virt-viewer;
+
+  home.packages = [
+    config.my.packages.libvirt
+    config.my.packages.virt-viewer
   ];
 
   virtualisation.libvirt.enable = true;

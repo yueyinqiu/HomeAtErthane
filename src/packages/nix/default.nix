@@ -4,7 +4,9 @@
   ...
 }:
 {
-  nix.package = pkgs.nix;
+  my.packages.nix = pkgs.nix;
+
+  nix.package = config.my.packages.nix;
   xdg.configFile."nix/access-tokens.conf.example".text = ''
     access-tokens = github.com=ghp_XXXXXX
   '';

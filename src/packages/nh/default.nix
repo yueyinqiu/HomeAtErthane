@@ -1,4 +1,6 @@
-{ ... }: {
+{ config, ... }: {
+  my.packages.nh = config.programs.nh.package;
+
   programs.nh = {
     enable = true;
     clean.enable = true;
