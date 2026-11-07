@@ -5,10 +5,10 @@
   ...
 }:
 let
-  ghostty = "${config.programs.ghostty.package}/bin/ghostty";
-  bash = "${config.programs.bash.package}/bin/bash";
+  ghostty = "${config.my.packages.ghostty}/bin/ghostty";
+  bash = "${config.my.packages.bash}/bin/bash";
   yazi = "${config.programs.yazi.shellWrapperName}";
-  ya = "${config.programs.yazi.package}/bin/ya";
+  ya = "${config.my.packages.yazi}/bin/ya";
 
   yazi-in-ghostty-bash-escaped = lib.escapeShellArgs [
     ghostty
