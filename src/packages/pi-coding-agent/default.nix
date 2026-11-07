@@ -1,64 +1,50 @@
 { config, pkgs, ... }:
 let
   home = config.home.homeDirectory;
-  piDirectory = "${home}/.pi/agent";
 
-  sandboxed = pkgs.writeShellApplication {
-    name = "pi-sandbox";
-    text = ''
-      args=(
-        --unshare-user
-        --unshare-ipc
-        --unshare-pid
-        --unshare-uts
-        --unshare-cgroup
+  pi = config.my.lib.mkNixPak {
+    config =
+      { ... }:
+      {
+        app.package = pkgs.pi-coding-agent;
+        app.binPath = "bin/pi";
 
-        --dev /dev
-        --proc /proc
-        --tmpfs /tmp
-        --ro-bind /nix /nix
-        --ro-bind /usr /usr
-        --ro-bind /etc /etc
-        --ro-bind /bin /bin
+        dbus.enable = false;
 
-        --ro-bind /run/current-system /run/current-system
-        --symlink ${config.xdg.stateHome}/nix/profiles/profile ${home}/.nix-profile
-        --ro-bind ${config.xdg.stateHome}/nix/profiles ${config.xdg.stateHome}/nix/profiles
+        bubblewrap = {
+          dieWithParent = true;
 
-        --bind ${piDirectory} ${piDirectory}
+          bind.rw = [
+            "${home}/.pi/agent"
+            config.my.paths.s
+          ];
 
-        --dev-bind /dev/kvm /dev/kvm
-        --ro-bind ${config.xdg.configHome}/git ${config.xdg.configHome}/git
+          bind.ro = [
+            "/nix"
+            "/usr"
+            "/etc"
+            "/bin"
+            "/run/current-system"
 
-        --bind ${config.my.paths.s} ${config.my.paths.s}
-      )
+            "${home}/.nix-profile"
+            "${home}/.local/state/nix/profiles"
 
-      IFS=':'
-      for d in ''${PI_SANDBOX_EXTRA_DIRECTORIES:-}; do
-        if [ -n "$d" ]; then
-          args+=(--bind "$d" "$d")
-        fi
-      done
-      unset IFS
+            "${home}/.config/git"
+          ];
 
-      exec ${pkgs.bubblewrap}/bin/bwrap \
-        --setenv PI_CLIPBOARD_OSC52 1 \
-        "''${args[@]}" \
-        -- ${pkgs.pi-coding-agent}/bin/pi "$@"
-    '';
+          bind.dev = [ "/dev/kvm" ];
+
+          tmpfs = [ "/tmp" ];
+
+          env = {
+            PI_CLIPBOARD_OSC52 = "1";
+          };
+        };
+      };
   };
 in
 {
-  my.packages.pi-coding-agent = pkgs.symlinkJoin {
-    name = "pi-coding-agent";
-    paths = [ pkgs.pi-coding-agent ];
-    version = pkgs.pi-coding-agent.version;
-    postBuild = ''
-      rm "$out/bin/pi"
-      cp ${sandboxed}/bin/pi-sandbox "$out/bin/pi"
-      chmod +x "$out/bin/pi"
-    '';
-  };
+  my.packages.pi-coding-agent = pi.config.env;
 
   programs.pi-coding-agent = {
     enable = true;
