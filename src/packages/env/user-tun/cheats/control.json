@@ -1,0 +1,10 @@
+{
+  "Command": [
+    {
+      "$type": "CommandTokenLiteral",
+      "Value": "user-tun-control"
+    }
+  ],
+  "Description": "user-tun; control; mihomo",
+  "ExtraArguments": false
+}
