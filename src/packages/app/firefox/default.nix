@@ -1,4 +1,4 @@
-{ config, nixpak, pkgs, ... }:
+{ config, nixpak, pkgs, lib, ... }:
 let
   firefox = config.my.lib.mkNixPak {
     config =
@@ -47,9 +47,15 @@ in
   home.packages = [
     (pkgs.writeShellApplication {
       name = "f";
-      text = ''
-        exec ${config.my.packages.niri}/bin/niri msg action spawn -- ${config.my.packages.firefox}/bin/firefox
-      '';
+      text = lib.escapeShellArgs [
+        "exec"
+        "${config.my.packages.niri}/bin/niri"
+        "msg"
+        "action"
+        "spawn"
+        "--"
+        "${config.my.packages.firefox}/bin/firefox"
+      ];
     })
   ];
 }

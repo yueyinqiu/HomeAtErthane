@@ -1,6 +1,7 @@
 {
   pkgs,
   config,
+  lib,
   ...
 }:
 let
@@ -10,7 +11,7 @@ let
     buildInputs = [ pkgs.makeWrapper ];
     postBuild = ''
       wrapProgram $out/bin/aliyunpan \
-        --set-default ALIYUNPAN_CONFIG_DIR "${config.xdg.configHome}/aliyunpan"
+        --set-default ALIYUNPAN_CONFIG_DIR ${lib.escapeShellArg "${config.xdg.configHome}/aliyunpan"}
     '';
   };
 in
