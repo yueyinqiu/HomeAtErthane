@@ -1,0 +1,10 @@
+{
+  "Command": [
+    {
+      "$type": "CommandTokenLiteral",
+      "Value": "baidunetdisk"
+    }
+  ],
+  "Description": "baidunetdisk; baidu; netdisk; launch",
+  "ExtraArguments": false
+}

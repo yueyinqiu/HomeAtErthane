@@ -1,0 +1,10 @@
+{
+  "Command": [
+    {
+      "$type": "CommandTokenLiteral",
+      "Value": "steam"
+    }
+  ],
+  "Description": "steam; game; launch",
+  "ExtraArguments": false
+}
