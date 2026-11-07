@@ -2,7 +2,7 @@
 let
   sevenZip = config.my.lib.mkNixPak {
     config =
-      { ... }:
+      { sloth, ... }:
       {
         app.package = pkgs._7zip-zstd;
         app.binPath = "bin/7z";
@@ -20,6 +20,10 @@ let
           network = false;
 
           bind.rw = [
+            [
+              (sloth.mkdir sloth.appDataDir)
+              sloth.homeDir
+            ]
             config.my.paths.s
           ];
         };
