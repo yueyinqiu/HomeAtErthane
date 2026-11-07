@@ -12,10 +12,6 @@ let
         app.package = pkgs.qq;
         app.binPath = "bin/qq";
 
-        dbus.policies = {
-          "org.fcitx.Fcitx5" = "talk";
-        };
-
         bubblewrap = {
           dieWithParent = true;
 

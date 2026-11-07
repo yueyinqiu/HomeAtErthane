@@ -13,7 +13,6 @@ let
         app.binPath = "bin/firefox";
 
         dbus.policies = {
-          "org.fcitx.Fcitx5" = "talk";
           "org.mozilla.firefox.*" = "own";
         };
 

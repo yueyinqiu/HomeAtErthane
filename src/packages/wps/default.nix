@@ -12,10 +12,6 @@ let
         app.package = pkgs.wpsoffice-cn;
         app.binPath = "bin/wps";
 
-        dbus.policies = {
-          "org.fcitx.Fcitx5" = "talk";
-        };
-
         bubblewrap = {
           dieWithParent = true;
 

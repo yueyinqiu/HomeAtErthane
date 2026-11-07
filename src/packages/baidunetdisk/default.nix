@@ -12,10 +12,6 @@ let
         app.package = baidunetdisk.baidunetdisk;
         app.binPath = "bin/baidunetdisk";
 
-        dbus.policies = {
-          "org.fcitx.Fcitx5" = "talk";
-        };
-
         bubblewrap = {
           dieWithParent = true;
 

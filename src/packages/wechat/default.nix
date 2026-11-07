@@ -12,10 +12,6 @@ let
         app.package = pkgs.wechat;
         app.binPath = "bin/wechat";
 
-        dbus.policies = {
-          "org.fcitx.Fcitx5" = "talk";
-        };
-
         bubblewrap = {
           dieWithParent = true;
           shareIpc = true;
