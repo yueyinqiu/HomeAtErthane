@@ -1,9 +1,12 @@
 {
   pkgs,
+  config,
   ...
 }:
 {
+  my.packages.steam-run = pkgs.steam-run;
+
   home.packages = [
-    pkgs.steam-run
+    config.my.packages.steam-run
   ];
 }

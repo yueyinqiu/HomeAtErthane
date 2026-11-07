@@ -5,6 +5,8 @@
 {
   programs.snavi.enable = true;
 
+  my.packages.snavi = config.programs.snavi.package;
+
   programs.bash.initExtra = ''
     s() {
       local result="$(${config.programs.snavi.wrapperName})"

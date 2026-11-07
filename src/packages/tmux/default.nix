@@ -1,4 +1,6 @@
-{ ... }: {
+{ config, ... }: {
+  my.packages.tmux = config.programs.tmux.package;
+
   programs.tmux = {
     enable = true;
     mouse = true;

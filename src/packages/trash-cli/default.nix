@@ -1,6 +1,8 @@
-{ pkgs, ... }: {
-  home.packages = with pkgs; [
-    trash-cli
+{ pkgs, config, ... }: {
+  my.packages.trash-cli = pkgs.trash-cli;
+
+  home.packages = [
+    config.my.packages.trash-cli
   ];
 
 }
