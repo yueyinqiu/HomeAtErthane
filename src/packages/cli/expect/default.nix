@@ -1,10 +1,21 @@
-{ pkgs, config, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 let
   my-expect-bash-run = pkgs.writeShellApplication {
     name = "my-expect-bash-run";
     text = ''
       escaped="''${*@Q}"
-      ${config.my.packages.expect}/bin/expect "${./bash-run.exp}" -- "$escaped"
+      ${
+        lib.escapeShellArgs [
+          "exec"
+          "${config.my.packages.expect}/bin/expect"
+          ./bash-run.exp
+        ]
+      } -- "$escaped"
     '';
   };
 in

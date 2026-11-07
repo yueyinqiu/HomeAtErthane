@@ -1,18 +1,28 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   yaml = pkgs.formats.yaml { };
 
   # 与 NixosErthane 的 user-tun 部分保持一致（system 侧 gost 把 uid1000 流量转发到这个 unix socket）
   unixSock = "/run/user-tun/1000/sock";
-  mihomoSocksPort = 16884;   # mihomo 的 mixed-in 重入端口
+  mihomoSocksPort = 16884; # mihomo 的 mixed-in 重入端口
 
   gostConfig = yaml.generate "user-tun-gost.yaml" {
     services = [
       {
         name = "user-1000-in";
         addr = unixSock;
-        handler = { type = "socks5"; chain = "to-mihomo"; };
-        listener = { type = "unix"; };
+        handler = {
+          type = "socks5";
+          chain = "to-mihomo";
+        };
+        listener = {
+          type = "unix";
+        };
       }
     ];
     chains = [
@@ -25,8 +35,12 @@ let
               {
                 name = "mihomo-socks-in";
                 addr = "127.0.0.1:${toString mihomoSocksPort}";
-                connector = { type = "socks5"; };
-                dialer = { type = "tcp"; };
+                connector = {
+                  type = "socks5";
+                };
+                dialer = {
+                  type = "tcp";
+                };
               }
             ];
           }
@@ -44,10 +58,14 @@ in
       Description = "user-tun gost bridge (unix socket -> mihomo socks-in)";
     };
     Service = {
-      ExecStart = "${config.my.packages.gost}/bin/gost -C ${gostConfig}";
+      ExecStart = lib.hm.strings.escapeSystemdExecArgs [
+        "${config.my.packages.gost}/bin/gost"
+        "-C"
+        gostConfig
+      ];
       Restart = "on-failure";
       RestartSec = 3;
-      UMask = "0000";   # socket 世界可写（0777），靠上层目录 0770 兜底
+      UMask = "0000"; # socket 世界可写（0777），靠上层目录 0770 兜底
     };
     Install = {
       WantedBy = [ "default.target" ];
