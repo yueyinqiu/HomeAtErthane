@@ -3,6 +3,7 @@ let
   home = config.home.homeDirectory;
   piDirectory = "${home}/.pi/agent";
 
+  # https://github.com/nixpak/nixpak/issues/237
   sandboxed = pkgs.writeShellApplication {
     name = "pi-sandbox";
     text = ''
