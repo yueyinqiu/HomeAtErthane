@@ -1,4 +1,6 @@
-{ pkgs, ... }: {
+{ pkgs, config, ... }: {
+  my.packages.fcitx5 = config.i18n.inputMethod.package;
+
   i18n.inputMethod = {
     enable = true;
     type = "fcitx5";

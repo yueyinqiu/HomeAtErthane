@@ -1,6 +1,8 @@
-{ pkgs, ... }: {
-  home.packages = with pkgs; [
-    expect
+{ pkgs, config, ... }: {
+  my.packages.expect = pkgs.expect;
+
+  home.packages = [
+    config.my.packages.expect
 
     (pkgs.writeShellApplication {
       name = "my-expect-bash-run";
