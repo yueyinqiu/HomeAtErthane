@@ -31,4 +31,24 @@
       Restart = "on-failure";
     };
   };
+
+  systemd.user.services.easytier-naxior = {
+    Unit = {
+      Description = "EasyTier network for naxior";
+      After = [ "network-online.target" ];
+      Wants = [ "network-online.target" ];
+    };
+    Install = {
+      WantedBy = [ "default.target" ];
+    };
+    Service = {
+      EnvironmentFile = "${config.xdg.configHome}/home-manager-mihomo-manager/to-tongji/easytier-naxior.env";
+      ExecStart = lib.hm.strings.escapeSystemdExecArgs [
+        "${config.my.packages.easytier}/bin/easytier-core"
+        "-c"
+        ./easytier-naxior.toml
+      ];
+      Restart = "on-failure";
+    };
+  };
 }
