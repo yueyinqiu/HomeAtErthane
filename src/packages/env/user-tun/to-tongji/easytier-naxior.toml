@@ -10,8 +10,8 @@ dst_addr = "10.126.127.1:7896"
 proto = "tcp"
 
 [[port_forward]]
-bind_addr = "127.0.0.1:25820"
-dst_addr = "10.126.127.1:45200"
+bind_addr = "127.0.0.1:45200"
+dst_addr = "10.126.127.1:59553"
 proto = "tcp"
 
 [network_identity]
