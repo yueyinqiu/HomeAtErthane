@@ -6,7 +6,7 @@ udp_whitelist = []
 
 [[port_forward]]
 bind_addr = "127.0.0.1:25820"
-dst_addr = "10.236.127.1:7896"
+dst_addr = "10.126.127.1:7896"
 proto = "tcp"
 
 [network_identity]
