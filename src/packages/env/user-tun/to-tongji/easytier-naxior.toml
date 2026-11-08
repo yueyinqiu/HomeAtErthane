@@ -9,6 +9,11 @@ bind_addr = "127.0.0.1:25820"
 dst_addr = "10.126.127.1:7896"
 proto = "tcp"
 
+[[port_forward]]
+bind_addr = "127.0.0.1:25820"
+dst_addr = "10.126.127.1:45200"
+proto = "tcp"
+
 [network_identity]
 network_name = "8ee862a3-8146-470b-9dba-242bfbb85b51"
 

@@ -5,14 +5,14 @@ proxy-groups:
     type: select
     proxies:
       - docker-easyconnect
-      - lab-g3080
+      - naxior
 
 proxies:
   - name: "docker-easyconnect"
     type: socks5
     server: 127.0.0.1
     port: 59553
-  - name: "lab-g3080"
+  - name: "naxior"
     type: socks5
-    server: 10.126.126.3
-    port: 59553
+    server: 127.0.0.1
+    port: 45200
