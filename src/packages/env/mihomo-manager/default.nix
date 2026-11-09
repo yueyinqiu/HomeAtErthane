@@ -1,4 +1,6 @@
-{ nixpkgs-master, ... }: {
+{ pkgs, config, ... }: {
   home-manager-mihomo-manager.enable = true;
-  home-manager-mihomo-manager.mihomo-tui.package = nixpkgs-master.mihomo-tui;
+
+  my.packages.mihomo-tui = pkgs.callPackage ./mihomo-tui { };
+  home-manager-mihomo-manager.mihomo-tui.package = config.my.packages.mihomo-tui;
 }
