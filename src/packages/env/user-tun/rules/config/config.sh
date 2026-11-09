@@ -7,13 +7,12 @@
 # "$HOME_MANAGER_MIHOMO_MANAGER_PROXIES" for the generated list of managed proxy instances
 # . for the instance's own configuration files
 
-rules=(merge default-rules.yaml)
-if [[ -f extra-default-rules.yaml ]]; then
-  rules+=(merge extra-default-rules.yaml)
-fi
+rules=(edit rules/*.yaml)
 
 "$MMMM" \
+  merge interface.yaml \
   merge "$HOME_MANAGER_MIHOMO_MANAGER_PROXIES" \
   "${rules[@]}" \
+  edit final.yaml \
   js rules.js \
   save "$OUTPUT_PATH"

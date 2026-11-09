@@ -1,0 +1,13 @@
+Rules:
+  Append:
+    - MATCH,DIRECT
+  Delete: []
+  Prepend: []
+Proxies:
+  Delete: []
+  Prepend: []
+  Append: []
+ProxyGroups:
+  Delete: []
+  Prepend: []
+  Append: []

@@ -1,0 +1,60 @@
+Rules:
+  Prepend:
+    # cachix
+    - DOMAIN-SUFFIX,cachix.org,hmmm-ye-sha-yun
+
+    # corona studio
+    - DOMAIN,corona.studio,hmmm-ye-sha-yun
+
+    # github
+    - DOMAIN,github.com,hmmm-ye-sha-yun
+    - DOMAIN,api.github.com,hmmm-ye-sha-yun
+    - DOMAIN,codeload.github.com,hmmm-ye-sha-yun
+    - DOMAIN,objects.githubusercontent.com,hmmm-ye-sha-yun
+    - DOMAIN,raw.githubusercontent.com,hmmm-ye-sha-yun
+    - DOMAIN,gist.githubusercontent.com,hmmm-ye-sha-yun
+    - DOMAIN,avatars.githubusercontent.com,hmmm-ye-sha-yun
+    - DOMAIN,user-images.githubusercontent.com,hmmm-ye-sha-yun
+    - DOMAIN,media.githubusercontent.com,hmmm-ye-sha-yun
+
+    # gitlab
+    - DOMAIN,gitlab.com,hmmm-ye-sha-yun
+    - DOMAIN,registry.gitlab.com,hmmm-ye-sha-yun
+
+    # google
+    - DOMAIN,google.com,hmmm-ye-sha-yun
+    - DOMAIN,translate.google.com,hmmm-ye-sha-yun
+    - DOMAIN,www.google.com,hmmm-ye-sha-yun
+    - DOMAIN,www.google.com.hk,hmmm-ye-sha-yun
+
+    # nixos
+    - DOMAIN,discourse.nixos.org,hmmm-ye-sha-yun
+    - DOMAIN,cache.nixos.org,hmmm-ye-sha-yun
+    - DOMAIN,channels.nixos.org,hmmm-ye-sha-yun
+
+    # visual studio code
+    - DOMAIN-SUFFIX,vsassets.io,hmmm-ye-sha-yun
+    
+    # web archive
+    - DOMAIN,web.archive.org,hmmm-ye-sha-yun
+    
+    - DOMAIN,www.reddit.com,hmmm-ye-sha-yun
+    - DOMAIN,github.githubassets.com,hmmm-ye-sha-yun
+    - DOMAIN,camo.githubusercontent.com,hmmm-ye-sha-yun
+    - DOMAIN,home-manager-options.extranix.com,hmmm-ye-sha-yun
+    - DOMAIN,ajax.googleapis.com,hmmm-ye-sha-yun
+    - DOMAIN,proxy.golang.org,hmmm-ye-sha-yun
+    - DOMAIN-SUFFIX,docker.io,hmmm-ye-sha-yun
+    - DOMAIN,production.cloudfront.docker.com,hmmm-ye-sha-yun
+    - DOMAIN,client-update.steamstatic.com,hmmm-ye-sha-yun
+    - DOMAIN,api.steampowered.com,hmmm-ye-sha-yun
+  Delete: []
+  Append: []
+Proxies:
+  Delete: []
+  Prepend: []
+  Append: []
+ProxyGroups:
+  Delete: []
+  Prepend: []
+  Append: []

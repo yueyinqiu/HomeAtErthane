@@ -1,0 +1,17 @@
+Rules:
+  Prepend:
+    - IP-CIDR,100.64.178.199/32,hmmm-to-tongji,no-resolve
+    - IP-CIDR,100.64.224.22/32,hmmm-to-tongji,no-resolve
+    - IP-CIDR,10.60.45.121/32,hmmm-to-tongji,no-resolve
+    - DOMAIN-SUFFIX,tongji.edu.cn,hmmm-to-tongji
+    - DOMAIN-SUFFIX,tjslp.yueyinqiu.top,hmmm-to-tongji
+  Delete: []
+  Append: []
+Proxies:
+  Delete: []
+  Prepend: []
+  Append: []
+ProxyGroups:
+  Delete: []
+  Prepend: []
+  Append: []
