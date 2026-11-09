@@ -8,13 +8,14 @@
 # . for the instance's own configuration files
 
 if [ -z "$(find "$STATE_DIRECTORY/origin-ye-sha-yun.yaml" -mtime -30)" ]; then
+  url="$(tr -d '[:space:]' < source.txt)"
   curl -L -H "User-Agent: flclash" \
     --output "$STATE_DIRECTORY/origin-ye-sha-yun.yaml" \
-    https://vx.yeshayun.com/
+    "$url"
 fi
 
 "$MMMM" \
+  merge interface.yaml \
   merge "$STATE_DIRECTORY/origin-ye-sha-yun.yaml" \
-  js add-interface.js \
   js to-global.js \
   save "$OUTPUT_PATH"
