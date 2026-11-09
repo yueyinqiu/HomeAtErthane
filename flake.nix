@@ -17,6 +17,7 @@
       url = "github:AshleyYakeley/NixVirt/v0.6.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixpkgs-master.url = "github:NixOS/nixpkgs/master";
 
     home-manager.url = "github:nix-community/home-manager/master";
 
@@ -41,6 +42,7 @@
       inputs.home-manager.lib.homeManagerConfiguration {
         pkgs = inputs.nixpkgs.legacyPackages.${system};
         extraSpecialArgs = {
+          nixpkgs-master = inputs.nixpkgs-master.legacyPackages.${system};
           nixvirt = inputs.NixVirt;
           nur = inputs.nur.legacyPackages.${system}.repos;
           nix-wpsoffice-cn = inputs.nix-wpsoffice-cn.packages.${system};
