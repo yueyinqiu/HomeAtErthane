@@ -10,19 +10,17 @@
 cat > "$OUTPUT_PATH" << EOF
 mode: global
 
+interface-name: wlp2s0
+
 proxy-groups:
   - name: GLOBAL
     type: select
     proxies:
       - tongji-proxy
       - naxior
-      - direct
+      - DIRECT
 
 proxies:
-  - name: "direct"
-    type: socks5
-    server: 127.0.0.1
-    port: 53077
   - name: tongji-proxy
     type: vless
     server: 127.0.0.1

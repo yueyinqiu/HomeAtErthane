@@ -1,5 +1,7 @@
 mode: global
 
+interface-name: wlp2s0
+
 proxies:
   - name: "direct"
     type: socks5

@@ -1,3 +1,5 @@
+interface-name: wlp2s0
+
 rules:
   # cachix
   - DOMAIN-SUFFIX,cachix.org,hmmm-ye-sha-yun
@@ -37,5 +39,5 @@ rules:
   # web archive
   - DOMAIN,web.archive.org,hmmm-ye-sha-yun
 
-  - MATCH,direct
+  - MATCH,DIRECT
   

@@ -8,7 +8,6 @@ function main(config, log) {
 
     config.proxies = [
         ...withInterface(config.proxies, "wlp2s0", "wifi"),
-        ...withInterface(config.proxies, "enp0s31f6", "eth"),
     ];
 
     return config;

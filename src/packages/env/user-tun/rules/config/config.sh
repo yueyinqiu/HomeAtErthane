@@ -14,7 +14,6 @@ fi
 
 "$MMMM" \
   merge "$HOME_MANAGER_MIHOMO_MANAGER_PROXIES" \
-  merge direct.yaml \
   "${rules[@]}" \
   js rules.js \
   save "$OUTPUT_PATH"

@@ -16,6 +16,5 @@ fi
 "$MMMM" \
   merge "$STATE_DIRECTORY/origin-ye-sha-yun.yaml" \
   js add-interface.js \
-  merge direct.yaml \
   js to-global.js \
   save "$OUTPUT_PATH"
