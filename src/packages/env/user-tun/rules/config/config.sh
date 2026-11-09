@@ -7,7 +7,10 @@
 # "$HOME_MANAGER_MIHOMO_MANAGER_PROXIES" for the generated list of managed proxy instances
 # . for the instance's own configuration files
 
-rules=(edit rules/*.yaml)
+rules=()
+for file in rules/*.yaml; do
+  rules+=(edit "$file")
+done
 
 "$MMMM" \
   merge interface.yaml \
