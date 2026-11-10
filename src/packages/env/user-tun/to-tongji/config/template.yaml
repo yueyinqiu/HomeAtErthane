@@ -15,7 +15,7 @@ proxies:
     type: vless
     server: 127.0.0.1
     port: 21890
-    uuid: @tongji_proxy_credential@
+    uuid: @tongji-proxy-credential@
     network: tcp
     udp: true
     tls: true
