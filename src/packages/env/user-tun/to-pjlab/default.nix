@@ -50,6 +50,7 @@
           - "net.ipv4.conf.default.route_localnet=1"
         extra_hosts:
           - "localhost.sangfor.com.cn:127.0.0.1"
+          # curl -s 'https://dns.alidns.com/resolve?name=vpn.pjlab.org.cn&type=A'
           - "vpn.pjlab.org.cn:140.206.167.137"
   '';
 }
