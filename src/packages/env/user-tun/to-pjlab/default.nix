@@ -50,5 +50,12 @@
           - "net.ipv4.conf.default.route_localnet=1"
         dns:
           - "114.114.114.114"
+        # aTrust 用它自己的本地 HTTPS/RPC 服务，服务就监听在容器内的 127.0.0.1 上，
+        # 证书域名是 localhost.sangfor.com.cn（真实 DNS 解析为 127.0.0.1）。
+        # 宿主机的 fake-ip tun 会把所有 53 端口 DNS 劫持成 198.18.x.x/2001:2::x，
+        # 导致该域名被解析成假 IP，本地服务连不上（"couldn't resolve host name"）。
+        # 这里直接写 hosts 绕过 DNS 劫持，固定解析到容器内回环地址。
+        extra_hosts:
+          - "localhost.sangfor.com.cn:127.0.0.1"
   '';
 }
