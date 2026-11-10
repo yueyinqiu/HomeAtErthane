@@ -42,6 +42,7 @@
           URLWIN: "1"
           PASSWORD: "1"
           FAKE_HWADDR: "BE:D3:BD:24:71:D8"
+          IPTABLES_LEGACY: "1"
         devices:
           - "/dev/net/tun"
         cap_add:
