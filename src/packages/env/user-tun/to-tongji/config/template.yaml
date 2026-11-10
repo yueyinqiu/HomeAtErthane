@@ -1,0 +1,31 @@
+mode: global
+
+interface-name: wlp2s0
+
+proxy-groups:
+  - name: GLOBAL
+    type: select
+    proxies:
+      - tongji-proxy
+      - naxior
+      - DIRECT
+
+proxies:
+  - name: tongji-proxy
+    type: vless
+    server: 127.0.0.1
+    port: 21890
+    uuid: @tongji_proxy_credential@
+    network: tcp
+    udp: true
+    tls: true
+    servername: www.bilibili.com
+    reality-opts:
+      public-key: BrRWBz_Zd9AVTBhStWKN2ErLta-BrRWkYMKPcQzO4HM
+      short-id: 20b2a7cae3d8fde7
+      support-x25519mlkem768: true
+    client-fingerprint: chrome
+  - name: naxior
+    type: socks5
+    server: 127.0.0.1
+    port: 25820
