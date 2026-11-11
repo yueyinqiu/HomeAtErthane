@@ -40,6 +40,7 @@ let
 
           env = {
             QT_IM_MODULE = "fcitx";
+            QT_QPA_PLATFORM = "wayland";
           };
         };
       };
