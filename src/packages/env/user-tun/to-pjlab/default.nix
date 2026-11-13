@@ -35,6 +35,7 @@
         image: docker.io/hagb/docker-atrust
         hostname: pjlab-atrust
         restart: unless-stopped
+        network_mode: "pasta:-i,wlp2s0"
         ports:
           - "127.0.0.1:52495:5901"
           - "127.0.0.1:59553:1080"
